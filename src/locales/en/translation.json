@@ -353,6 +353,22 @@
     "personalizedHelp": "Need personalized help?",
     "personalizedHelpDesc": "Contact our team via the Contact page."
   },
+  "helpBot": {
+    "needHelp": "Need Help?",
+    "frequentQuestions": "Here are answers to the most frequently asked questions:",
+    "verifyBreeder": "How to verify a breeder?",
+    "verifyBreederAnswer": "All our breeders are verified with SIRET number, ACACED certificate and official documents.",
+    "securePayment": "How does secure payment work?",
+    "securePaymentAnswer": "Funds are held in escrow until animal delivery, ensuring security.",
+    "problem": "What to do if I have a problem?",
+    "problemAnswer": "Contact our support via the Contact page or use the integrated messaging.",
+    "modifyListing": "How to modify my listing?",
+    "modifyListingAnswer": "Go to 'My Listings' from your breeder dashboard.",
+    "cancelReservation": "Can I cancel a reservation?",
+    "cancelReservationAnswer": "Cancellation conditions are defined in the generated sales contract.",
+    "personalizedHelp": "Need personalized help?",
+    "personalizedHelpDesc": "Contact our team via the Contact page."
+  },
   "searchAnimals": {
     "title": "Search Animals",
     "subtitle": "Find your perfect companion from certified breeders",

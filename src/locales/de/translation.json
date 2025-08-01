@@ -353,6 +353,22 @@
     "personalizedHelp": "Brauchen Sie persönliche Hilfe?",
     "personalizedHelpDesc": "Kontaktieren Sie unser Team über die Kontaktseite."
   },
+  "helpBot": {
+    "needHelp": "Brauchen Sie Hilfe?",
+    "frequentQuestions": "Hier sind Antworten auf die häufigsten Fragen:",
+    "verifyBreeder": "Wie verifiziert man einen Züchter?",
+    "verifyBreederAnswer": "Alle unsere Züchter sind mit SIRET-Nummer, ACACED-Zertifikat und offiziellen Dokumenten verifiziert.",
+    "securePayment": "Wie funktioniert die sichere Zahlung?",
+    "securePaymentAnswer": "Gelder werden treuhänderisch verwahrt bis zur Tierübergabe, was Sicherheit gewährleistet.",
+    "problem": "Was tun bei einem Problem?",
+    "problemAnswer": "Kontaktieren Sie unseren Support über die Kontaktseite oder nutzen Sie die integrierte Nachrichtenfunktion.",
+    "modifyListing": "Wie ändere ich meine Anzeige?",
+    "modifyListingAnswer": "Gehen Sie zu 'Meine Anzeigen' von Ihrem Züchter-Dashboard.",
+    "cancelReservation": "Kann ich eine Reservierung stornieren?",
+    "cancelReservationAnswer": "Stornierungsbedingungen sind im generierten Kaufvertrag definiert.",
+    "personalizedHelp": "Brauchen Sie persönliche Hilfe?",
+    "personalizedHelpDesc": "Kontaktieren Sie unser Team über die Kontaktseite."
+  },
   "searchAnimals": {
     "title": "Tiere suchen",
     "subtitle": "Finden Sie Ihren perfekten Begleiter von zertifizierten Züchtern",

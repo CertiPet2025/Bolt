@@ -1,31 +1,10 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { HelpCircle, X, MessageCircle } from 'lucide-react';
 
 const HelpBot: React.FC = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-
-  const predefinedAnswers = [
-    {
-      question: "Comment vérifier un éleveur ?",
-      answer: "Tous nos éleveurs sont vérifiés avec numéro SIRET, certificat ACACED et documents officiels."
-    },
-    {
-      question: "Comment fonctionne le paiement sécurisé ?",
-      answer: "Les fonds sont bloqués en séquestre jusqu'à la remise de l'animal, garantissant la sécurité."
-    },
-    {
-      question: "Que faire si j'ai un problème ?",
-      answer: "Contactez notre support via la page Contact ou utilisez la messagerie intégrée."
-    },
-    {
-      question: "Comment modifier mon annonce ?",
-      answer: "Rendez-vous dans 'Mes Annonces' depuis votre tableau de bord éleveur."
-    },
-    {
-      question: "Puis-je annuler une réservation ?",
-      answer: "Les conditions d'annulation sont définies dans le contrat de vente généré."
-    }
-  ];
 
   return (
     <>
@@ -44,7 +23,7 @@ const HelpBot: React.FC = () => {
             <div className="flex items-center justify-between p-4 border-b border-gray-200">
               <div className="flex items-center space-x-2">
                 <MessageCircle className="w-5 h-5 text-[#70C1B3]" />
-                <h3 className="text-lg font-bold text-black">Besoin d'Aide ?</h3>
+                <h3 className="text-lg font-bold text-black">{t('helpBot.needHelp')}</h3>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
@@ -56,17 +35,23 @@ const HelpBot: React.FC = () => {
 
             <div className="p-4 max-h-96 overflow-y-auto">
               <p className="text-gray-600 mb-4 text-sm">
-                Voici les réponses aux questions les plus fréquentes :
+                {t('helpBot.frequentQuestions')}
               </p>
               
               <div className="space-y-3">
-                {predefinedAnswers.map((item, index) => (
+                {[
+                  { questionKey: 'helpBot.verifyBreeder', answerKey: 'helpBot.verifyBreederAnswer' },
+                  { questionKey: 'helpBot.securePayment', answerKey: 'helpBot.securePaymentAnswer' },
+                  { questionKey: 'helpBot.problem', answerKey: 'helpBot.problemAnswer' },
+                  { questionKey: 'helpBot.modifyListing', answerKey: 'helpBot.modifyListingAnswer' },
+                  { questionKey: 'helpBot.cancelReservation', answerKey: 'helpBot.cancelReservationAnswer' }
+                ].map((item, index) => (
                   <div key={index} className="border border-gray-200 rounded-lg p-3 hover:border-[#A8E6CF] transition-colors">
                     <h4 className="font-medium text-black text-sm mb-2">
-                      {item.question}
+                      {t(item.questionKey)}
                     </h4>
                     <p className="text-gray-600 text-xs">
-                      {item.answer}
+                      {t(item.answerKey)}
                     </p>
                   </div>
                 ))}
@@ -74,8 +59,8 @@ const HelpBot: React.FC = () => {
 
               <div className="mt-6 p-3 bg-[#A8E6CF] bg-opacity-20 rounded-lg">
                 <p className="text-sm text-black">
-                  <strong>Besoin d'aide personnalisée ?</strong><br />
-                  Contactez notre équipe via la page Contact.
+                  <strong>{t('helpBot.personalizedHelp')}</strong><br />
+                  {t('helpBot.personalizedHelpDesc')}
                 </p>
               </div>
             </div>

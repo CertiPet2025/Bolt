@@ -353,6 +353,22 @@
     "personalizedHelp": "Hai bisogno di aiuto personalizzato?",
     "personalizedHelpDesc": "Contatta il nostro team tramite la pagina Contatto."
   },
+  "helpBot": {
+    "needHelp": "Hai Bisogno di Aiuto?",
+    "frequentQuestions": "Ecco le risposte alle domande più frequenti:",
+    "verifyBreeder": "Come verificare un allevatore?",
+    "verifyBreederAnswer": "Tutti i nostri allevatori sono verificati con numero SIRET, certificato ACACED e documenti ufficiali.",
+    "securePayment": "Come funziona il pagamento sicuro?",
+    "securePaymentAnswer": "I fondi sono tenuti in deposito fino alla consegna dell'animale, garantendo la sicurezza.",
+    "problem": "Cosa fare se ho un problema?",
+    "problemAnswer": "Contatta il nostro supporto tramite la pagina Contatto o usa la messaggistica integrata.",
+    "modifyListing": "Come modificare il mio annuncio?",
+    "modifyListingAnswer": "Vai su 'I Miei Annunci' dalla tua dashboard allevatore.",
+    "cancelReservation": "Posso cancellare una prenotazione?",
+    "cancelReservationAnswer": "Le condizioni di cancellazione sono definite nel contratto di vendita generato.",
+    "personalizedHelp": "Hai bisogno di aiuto personalizzato?",
+    "personalizedHelpDesc": "Contatta il nostro team tramite la pagina Contatto."
+  },
   "searchAnimals": {
     "title": "Cerca Animali",
     "subtitle": "Trova il tuo compagno perfetto da allevatori certificati",
