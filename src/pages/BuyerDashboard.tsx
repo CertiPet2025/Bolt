@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Heart, MessageSquare, Bell, MapPin, Filter, ShoppingCart } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+// import { useAuth } from '../context/AuthContext';
 
 const BuyerDashboard: React.FC = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  const user = { name: 'John Doe' }; // Temporary placeholder
 
   const stats = [
     { label: 'Saved Searches', value: '5', icon: Search, color: 'text-blue-600' },
