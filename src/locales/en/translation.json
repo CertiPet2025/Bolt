@@ -233,6 +233,7 @@
     "rating": "Rating",
     "reserve": "Reserve",
     "awaitingConfirmation": "Awaiting confirmation",
+    "pendingConfirmation": "Pending confirmation",
     "loadMore": "Load More Animals"
   },
   "myFavorites": {

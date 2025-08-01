@@ -235,6 +235,7 @@
     "rating": "Note",
     "reserve": "Réserver",
     "awaitingConfirmation": "En attente de confirmation",
+    "pendingConfirmation": "Confirmation en attente",
     "loadMore": "Charger plus d'animaux"
   },
   "myFavorites": {
