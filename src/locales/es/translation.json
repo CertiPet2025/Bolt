@@ -322,6 +322,7 @@
     "email": "Email",
     "phone": "Teléfono",
     "address": "Dirección",
+    "addressDetails": "123 Calle de Mascotas\n75001 París, Francia",
     "businessHours": "Horario Comercial",
     "mondayFriday": "Lunes - Viernes: 9:00 AM - 6:00 PM",
     "saturday": "Sábado: 10:00 AM - 4:00 PM",
@@ -333,7 +334,8 @@
     "yourEmail": "tu.email@ejemplo.com",
     "whatAbout": "¿De qué se trata?",
     "howCanHelp": "Cuéntanos cómo podemos ayudarte...",
-    "sendMessageBtn": "Enviar Mensaje"
+    "sendMessageBtn": "Enviar Mensaje",
+    "messageSent": "¡Mensaje enviado exitosamente! Te responderemos pronto."
   },
   "helpBot": {
     "needHelp": "¿Necesitas Ayuda?",

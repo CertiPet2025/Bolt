@@ -322,6 +322,7 @@
     "email": "Email",
     "phone": "Téléphone",
     "address": "Adresse",
+    "addressDetails": "123 Rue des Animaux\n75001 Paris, France",
     "businessHours": "Heures d'ouverture",
     "mondayFriday": "Lundi - Vendredi : 9h00 - 18h00",
     "saturday": "Samedi : 10h00 - 16h00",
@@ -333,7 +334,8 @@
     "yourEmail": "votre.email@exemple.com",
     "whatAbout": "De quoi s'agit-il ?",
     "howCanHelp": "Dites-nous comment nous pouvons vous aider...",
-    "sendMessageBtn": "Envoyer le message"
+    "sendMessageBtn": "Envoyer le message",
+    "messageSent": "Message envoyé avec succès ! Nous vous répondrons bientôt."
   },
   "helpBot": {
     "needHelp": "Besoin d'Aide ?",

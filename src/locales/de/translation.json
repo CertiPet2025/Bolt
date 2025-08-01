@@ -322,6 +322,7 @@
     "email": "E-Mail",
     "phone": "Telefon",
     "address": "Adresse",
+    "addressDetails": "123 Tierstraße\n75001 Paris, Frankreich",
     "businessHours": "Geschäftszeiten",
     "mondayFriday": "Montag - Freitag: 9:00 - 18:00",
     "saturday": "Samstag: 10:00 - 16:00",
@@ -333,7 +334,8 @@
     "yourEmail": "ihre.email@beispiel.com",
     "whatAbout": "Worum geht es?",
     "howCanHelp": "Sagen Sie uns, wie wir Ihnen helfen können...",
-    "sendMessageBtn": "Nachricht senden"
+    "sendMessageBtn": "Nachricht senden",
+    "messageSent": "Nachricht erfolgreich gesendet! Wir werden uns bald bei Ihnen melden."
   },
   "helpBot": {
     "needHelp": "Brauchen Sie Hilfe?",

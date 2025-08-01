@@ -322,6 +322,7 @@
     "email": "Email",
     "phone": "Phone",
     "address": "Address",
+    "addressDetails": "123 Pet Street\n75001 Paris, France",
     "businessHours": "Business Hours",
     "mondayFriday": "Monday - Friday: 9:00 AM - 6:00 PM",
     "saturday": "Saturday: 10:00 AM - 4:00 PM",
@@ -333,7 +334,8 @@
     "yourEmail": "your.email@example.com",
     "whatAbout": "What is this about?",
     "howCanHelp": "Tell us how we can help you...",
-    "sendMessageBtn": "Send Message"
+    "sendMessageBtn": "Send Message",
+    "messageSent": "Message sent successfully! We will get back to you soon."
   },
   "helpBot": {
     "needHelp": "Need Help?",
