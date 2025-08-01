@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Globe, ChevronDown } from 'lucide-react';
 
 const LanguageSelector: React.FC = () => {
+  const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('fr');
+  const selectedLanguage = i18n.language;
 
   const languages = [
     { code: 'fr', name: 'Français', flag: '🇫🇷' },
@@ -16,10 +18,8 @@ const LanguageSelector: React.FC = () => {
   const currentLanguage = languages.find(lang => lang.code === selectedLanguage);
 
   const handleLanguageChange = (languageCode: string) => {
-    setSelectedLanguage(languageCode);
+    i18n.changeLanguage(languageCode);
     setIsOpen(false);
-    // In a real app, this would trigger translation loading
-    console.log(`Language changed to: ${languageCode}`);
   };
 
   return (

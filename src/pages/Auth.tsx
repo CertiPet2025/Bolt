@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Mail, Lock, User, Building } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const Auth: React.FC = () => {
+  const { t } = useTranslation();
   const { type } = useParams<{ type: 'breeder' | 'buyer' }>();
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -51,10 +53,13 @@ const Auth: React.FC = () => {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-black">
-            {isLogin ? 'Sign In' : 'Create Account'}
+            {isLogin ? t('auth.signIn') : t('auth.createAccount')}
           </h2>
           <p className="mt-2 text-gray-600">
-            {isBreeder ? 'Breeder' : 'Buyer'} {isLogin ? 'Login' : 'Registration'}
+            {isBreeder 
+              ? (isLogin ? t('auth.breederLogin') : t('auth.breederRegistration'))
+              : (isLogin ? t('auth.buyerLogin') : t('auth.buyerRegistration'))
+            }
           </p>
         </div>
 
@@ -63,7 +68,7 @@ const Auth: React.FC = () => {
             {!isLogin && (
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
-                  Full Name
+                  {t('auth.fullName')}
                 </label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -74,7 +79,7 @@ const Auth: React.FC = () => {
                     onChange={handleInputChange}
                     required={!isLogin}
                     className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                    placeholder="Enter your full name"
+                    placeholder={t('auth.enterFullName')}
                   />
                 </div>
               </div>
@@ -82,7 +87,7 @@ const Auth: React.FC = () => {
 
             <div>
               <label className="block text-sm font-medium text-black mb-2">
-                Email Address
+                {t('auth.emailAddress')}
               </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -93,14 +98,14 @@ const Auth: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                  placeholder="Enter your email"
+                  placeholder={t('auth.enterEmail')}
                 />
               </div>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-black mb-2">
-                Password
+                {t('common.password')}
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -111,7 +116,7 @@ const Auth: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                  placeholder="Enter your password"
+                  placeholder={t('auth.enterPassword')}
                 />
               </div>
             </div>
@@ -119,7 +124,7 @@ const Auth: React.FC = () => {
             {!isLogin && isBreeder && (
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
-                  {type === 'breeder' ? 'Kennel/Cattery Name' : 'Company Name'}
+                  {type === 'breeder' ? t('auth.kennelCatteryName') : t('auth.companyName')}
                 </label>
                 <div className="relative">
                   <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -129,7 +134,7 @@ const Auth: React.FC = () => {
                     value={formData.company}
                     onChange={handleInputChange}
                     className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                    placeholder={`Enter your ${type === 'breeder' ? 'kennel/cattery' : 'company'} name`}
+                    placeholder={type === 'breeder' ? t('auth.enterKennelName') : t('auth.enterCompanyName')}
                   />
                 </div>
               </div>
@@ -141,7 +146,7 @@ const Auth: React.FC = () => {
               type="submit"
               className="w-full bg-[#A8E6CF] hover:bg-[#70C1B3] text-black py-3 px-4 rounded-md font-medium transition-colors"
             >
-              {isLogin ? 'Sign In' : 'Create Account'}
+              {isLogin ? t('auth.signIn') : t('auth.createAccount')}
             </button>
           </div>
 
@@ -151,7 +156,7 @@ const Auth: React.FC = () => {
               onClick={() => setIsLogin(!isLogin)}
               className="text-[#70C1B3] hover:text-[#A8E6CF] font-medium"
             >
-              {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
+              {isLogin ? t('auth.noAccount') : t('auth.hasAccount')}
             </button>
           </div>
         </form>

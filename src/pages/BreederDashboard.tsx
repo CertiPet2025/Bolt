@@ -1,16 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Plus, List, Users, MessageSquare, TrendingUp, Eye, CheckCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const BreederDashboard: React.FC = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
 
   const stats = [
-    { label: 'Active Listings', value: '12', icon: List, color: 'text-blue-600' },
-    { label: 'Total Views', value: '1,234', icon: Eye, color: 'text-green-600' },
-    { label: 'Interested Buyers', value: '45', icon: Users, color: 'text-purple-600' },
-    { label: 'Messages', value: '8', icon: MessageSquare, color: 'text-orange-600' },
+    { label: t('dashboard.breeder.activeListings'), value: '12', icon: List, color: 'text-blue-600' },
+    { label: t('dashboard.breeder.totalViews'), value: '1,234', icon: Eye, color: 'text-green-600' },
+    { label: t('dashboard.breeder.interestedBuyers'), value: '45', icon: Users, color: 'text-purple-600' },
+    { label: t('dashboard.breeder.messages'), value: '8', icon: MessageSquare, color: 'text-orange-600' },
   ];
 
   return (
@@ -18,10 +20,10 @@ const BreederDashboard: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-black mb-2">
-            Welcome back, {user?.name}!
+            {t('dashboard.breeder.welcome', { name: user?.name })}
           </h1>
           <p className="text-gray-600">
-            Manage your animal listings and connect with potential buyers
+            {t('dashboard.breeder.subtitle')}
           </p>
         </div>
 
@@ -49,9 +51,9 @@ const BreederDashboard: React.FC = () => {
             className="bg-[#A8E6CF] hover:bg-[#70C1B3] p-6 rounded-lg text-center transition-colors group"
           >
             <Plus className="w-12 h-12 text-black mx-auto mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-lg font-semibold text-black mb-2">Post an Animal</h3>
+            <h3 className="text-lg font-semibold text-black mb-2">{t('dashboard.breeder.postAnimal')}</h3>
             <p className="text-black text-opacity-80 text-sm">
-              Create a new listing for your animals
+              {t('dashboard.breeder.postAnimalDesc')}
             </p>
           </Link>
 
@@ -60,9 +62,9 @@ const BreederDashboard: React.FC = () => {
             className="bg-white hover:bg-[#A8E6CF] hover:bg-opacity-20 p-6 rounded-lg text-center border-2 border-[#A8E6CF] transition-colors group"
           >
             <List className="w-12 h-12 text-black mx-auto mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-lg font-semibold text-black mb-2">My Listings</h3>
+            <h3 className="text-lg font-semibold text-black mb-2">{t('dashboard.breeder.myListings')}</h3>
             <p className="text-gray-600 text-sm">
-              View and manage your current listings
+              {t('dashboard.breeder.myListingsDesc')}
             </p>
           </Link>
 
@@ -71,9 +73,9 @@ const BreederDashboard: React.FC = () => {
             className="bg-white hover:bg-[#A8E6CF] hover:bg-opacity-20 p-6 rounded-lg text-center border-2 border-[#A8E6CF] transition-colors group"
           >
             <Users className="w-12 h-12 text-black mx-auto mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-lg font-semibold text-black mb-2">My Buyers</h3>
+            <h3 className="text-lg font-semibold text-black mb-2">{t('dashboard.breeder.myBuyers')}</h3>
             <p className="text-gray-600 text-sm">
-              Connect with interested buyers
+              {t('dashboard.breeder.myBuyersDesc')}
             </p>
           </Link>
 
@@ -82,9 +84,9 @@ const BreederDashboard: React.FC = () => {
             className="bg-white hover:bg-[#A8E6CF] hover:bg-opacity-20 p-6 rounded-lg text-center border-2 border-[#A8E6CF] transition-colors group"
           >
             <MessageSquare className="w-12 h-12 text-black mx-auto mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-lg font-semibold text-black mb-2">Messaging</h3>
+            <h3 className="text-lg font-semibold text-black mb-2">{t('dashboard.breeder.messaging')}</h3>
             <p className="text-gray-600 text-sm">
-              Chat with potential buyers
+              {t('dashboard.breeder.messagingDesc')}
             </p>
           </Link>
         </div>
@@ -92,7 +94,7 @@ const BreederDashboard: React.FC = () => {
         {/* Recent Activity */}
         <div className="bg-white rounded-lg border-2 border-[#A8E6CF] shadow-sm">
           <div className="p-6 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-black">Recent Activity</h2>
+            <h2 className="text-xl font-semibold text-black">{t('dashboard.breeder.recentActivity')}</h2>
           </div>
           <div className="p-6">
             <div className="space-y-4">
@@ -101,8 +103,8 @@ const BreederDashboard: React.FC = () => {
                   <Eye className="w-5 h-5 text-black" />
                 </div>
                 <div>
-                  <p className="text-black font-medium">New view on "Golden Retriever - Luna"</p>
-                  <p className="text-gray-600 text-sm">2 hours ago</p>
+                  <p className="text-black font-medium">{t('dashboard.breeder.newView', { animal: 'Golden Retriever - Luna' })}</p>
+                  <p className="text-gray-600 text-sm">{t('dashboard.breeder.hoursAgo', { hours: 2 })}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -110,8 +112,8 @@ const BreederDashboard: React.FC = () => {
                   <MessageSquare className="w-5 h-5 text-black" />
                 </div>
                 <div>
-                  <p className="text-black font-medium">New message from Sarah M.</p>
-                  <p className="text-gray-600 text-sm">4 hours ago</p>
+                  <p className="text-black font-medium">{t('dashboard.breeder.newMessage', { name: 'Sarah M.' })}</p>
+                  <p className="text-gray-600 text-sm">{t('dashboard.breeder.hoursAgo', { hours: 4 })}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -119,8 +121,8 @@ const BreederDashboard: React.FC = () => {
                   <CheckCircle className="w-5 h-5 text-black" />
                 </div>
                 <div>
-                  <p className="text-black font-medium">Nouvelle réservation confirmée</p>
-                  <p className="text-gray-600 text-sm">1 day ago</p>
+                  <p className="text-black font-medium">{t('dashboard.breeder.newReservation')}</p>
+                  <p className="text-gray-600 text-sm">{t('dashboard.breeder.dayAgo', { days: 1 })}</p>
                 </div>
               </div>
             </div>

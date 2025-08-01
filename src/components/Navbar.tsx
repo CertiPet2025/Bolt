@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import LanguageSelector from './LanguageSelector';
 
 const Navbar: React.FC = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [breederDropdown, setBreederDropdown] = useState(false);
   const [buyerDropdown, setBuyerDropdown] = useState(false);
@@ -32,14 +34,14 @@ const Navbar: React.FC = () => {
           <div className="flex items-center space-x-3">
             <Link to="/" className="flex items-center space-x-3">
               <PawLogo />
-              <span className="text-xl font-bold text-black">CertiPet</span>
+              <span className="text-xl font-bold text-black">{t('navbar.certipet')}</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-black hover:text-[#70C1B3] transition-colors">
-              Home
+              {t('common.home')}
             </Link>
             
             {isAuthenticated && user?.type === 'breeder' && (
@@ -49,7 +51,7 @@ const Navbar: React.FC = () => {
                   onMouseLeave={() => setBreederDropdown(false)}
                   className="flex items-center text-black hover:text-[#70C1B3] transition-colors"
                 >
-                  Breeder <ChevronDown className="ml-1 w-4 h-4" />
+                  {t('navbar.breeder')} <ChevronDown className="ml-1 w-4 h-4" />
                 </button>
                 {breederDropdown && (
                   <div
@@ -58,16 +60,16 @@ const Navbar: React.FC = () => {
                     className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50"
                   >
                     <Link to="/breeder/dashboard" className="block px-4 py-2 text-black hover:bg-[#A8E6CF] hover:text-black">
-                      Dashboard
+                      {t('navbar.dashboard')}
                     </Link>
                     <Link to="/breeder/post-animal" className="block px-4 py-2 text-black hover:bg-[#A8E6CF] hover:text-black">
-                      Post an Animal
+                      {t('navbar.postAnimal')}
                     </Link>
                     <Link to="/breeder/listings" className="block px-4 py-2 text-black hover:bg-[#A8E6CF] hover:text-black">
-                      My Listings
+                      {t('navbar.myListings')}
                     </Link>
                     <Link to="/breeder/buyers" className="block px-4 py-2 text-black hover:bg-[#A8E6CF] hover:text-black">
-                      My Buyers
+                      {t('navbar.myBuyers')}
                     </Link>
                   </div>
                 )}
@@ -81,7 +83,7 @@ const Navbar: React.FC = () => {
                   onMouseLeave={() => setBuyerDropdown(false)}
                   className="flex items-center text-black hover:text-[#70C1B3] transition-colors"
                 >
-                  Buyer <ChevronDown className="ml-1 w-4 h-4" />
+                  {t('navbar.buyer')} <ChevronDown className="ml-1 w-4 h-4" />
                 </button>
                 {buyerDropdown && (
                   <div
@@ -90,13 +92,13 @@ const Navbar: React.FC = () => {
                     className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-50"
                   >
                     <Link to="/buyer/dashboard" className="block px-4 py-2 text-black hover:bg-[#A8E6CF] hover:text-black">
-                      Dashboard
+                      {t('navbar.dashboard')}
                     </Link>
                     <Link to="/buyer/search" className="block px-4 py-2 text-black hover:bg-[#A8E6CF] hover:text-black">
-                      Search Animals
+                      {t('navbar.searchAnimals')}
                     </Link>
                     <Link to="/buyer/favorites" className="block px-4 py-2 text-black hover:bg-[#A8E6CF] hover:text-black">
-                      My Favorites
+                      {t('navbar.myFavorites')}
                     </Link>
                   </div>
                 )}
@@ -105,27 +107,27 @@ const Navbar: React.FC = () => {
 
             {isAuthenticated && (
               <Link to="/messaging" className="text-black hover:text-[#70C1B3] transition-colors">
-                Messaging
+                {t('navbar.messaging')}
               </Link>
             )}
 
             <Link to="/contact" className="text-black hover:text-[#70C1B3] transition-colors">
-              Contact
+              {t('common.contact')}
             </Link>
             <Link to="/about" className="text-black hover:text-[#70C1B3] transition-colors">
-              About
+              {t('common.about')}
             </Link>
 
             <LanguageSelector />
 
             {isAuthenticated ? (
               <div className="flex items-center space-x-4">
-                <span className="text-black">Welcome, {user?.name}</span>
+                <span className="text-black">{t('common.welcome')}, {user?.name}</span>
                 <button
                   onClick={handleLogout}
                   className="bg-[#A8E6CF] text-black px-4 py-2 rounded-md hover:bg-[#70C1B3] transition-colors"
                 >
-                  Logout
+                  {t('common.logout')}
                 </button>
               </div>
             ) : (
@@ -134,13 +136,13 @@ const Navbar: React.FC = () => {
                   to="/auth/breeder"
                   className="bg-[#A8E6CF] text-black px-4 py-2 rounded-md hover:bg-[#70C1B3] transition-colors"
                 >
-                  Breeder Login
+                  {t('navbar.breederLogin')}
                 </Link>
                 <Link
                   to="/auth/buyer"
                   className="bg-[#A8E6CF] text-black px-4 py-2 rounded-md hover:bg-[#70C1B3] transition-colors"
                 >
-                  Buyer Login
+                  {t('navbar.buyerLogin')}
                 </Link>
               </div>
             )}
@@ -166,7 +168,7 @@ const Navbar: React.FC = () => {
                 className="block px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"
                 onClick={() => setIsOpen(false)}
               >
-                Home
+                {t('common.home')}
               </Link>
               
               {isAuthenticated && user?.type === 'breeder' && (
@@ -176,28 +178,28 @@ const Navbar: React.FC = () => {
                     className="block px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"
                     onClick={() => setIsOpen(false)}
                   >
-                    Breeder Dashboard
+                    {t('navbar.dashboard')}
                   </Link>
                   <Link
                     to="/breeder/post-animal"
                     className="block px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"
                     onClick={() => setIsOpen(false)}
                   >
-                    Post an Animal
+                    {t('navbar.postAnimal')}
                   </Link>
                   <Link
                     to="/breeder/listings"
                     className="block px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"
                     onClick={() => setIsOpen(false)}
                   >
-                    My Listings
+                    {t('navbar.myListings')}
                   </Link>
                   <Link
                     to="/breeder/buyers"
                     className="block px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"
                     onClick={() => setIsOpen(false)}
                   >
-                    My Buyers
+                    {t('navbar.myBuyers')}
                   </Link>
                 </>
               )}
@@ -209,21 +211,21 @@ const Navbar: React.FC = () => {
                     className="block px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"
                     onClick={() => setIsOpen(false)}
                   >
-                    Buyer Dashboard
+                    {t('navbar.dashboard')}
                   </Link>
                   <Link
                     to="/buyer/search"
                     className="block px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"
                     onClick={() => setIsOpen(false)}
                   >
-                    Search Animals
+                    {t('navbar.searchAnimals')}
                   </Link>
                   <Link
                     to="/buyer/favorites"
                     className="block px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"
                     onClick={() => setIsOpen(false)}
                   >
-                    My Favorites
+                    {t('navbar.myFavorites')}
                   </Link>
                 </>
               )}
@@ -234,7 +236,7 @@ const Navbar: React.FC = () => {
                   className="block px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"
                   onClick={() => setIsOpen(false)}
                 >
-                  Messaging
+                  {t('navbar.messaging')}
                 </Link>
               )}
 
@@ -243,14 +245,14 @@ const Navbar: React.FC = () => {
                 className="block px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"
                 onClick={() => setIsOpen(false)}
               >
-                Contact
+                {t('common.contact')}
               </Link>
               <Link
                 to="/about"
                 className="block px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"
                 onClick={() => setIsOpen(false)}
               >
-                About
+                {t('common.about')}
               </Link>
 
               {isAuthenticated ? (
@@ -258,7 +260,7 @@ const Navbar: React.FC = () => {
                   onClick={handleLogout}
                   className="block w-full text-left px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"
                 >
-                  Logout ({user?.name})
+                  {t('common.logout')} ({user?.name})
                 </button>
               ) : (
                 <div className="space-y-2 pt-2">
@@ -267,14 +269,14 @@ const Navbar: React.FC = () => {
                     className="block px-3 py-2 bg-[#A8E6CF] text-black rounded-md hover:bg-[#70C1B3]"
                     onClick={() => setIsOpen(false)}
                   >
-                    Breeder Login
+                    {t('navbar.breederLogin')}
                   </Link>
                   <Link
                     to="/auth/buyer"
                     className="block px-3 py-2 bg-[#A8E6CF] text-black rounded-md hover:bg-[#70C1B3]"
                     onClick={() => setIsOpen(false)}
                   >
-                    Buyer Login
+                    {t('navbar.buyerLogin')}
                   </Link>
                 </div>
               )}

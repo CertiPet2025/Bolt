@@ -1,16 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Search, Heart, MessageSquare, Bell, MapPin, Filter, ShoppingCart } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const BuyerDashboard: React.FC = () => {
+  const { t } = useTranslation();
   const { user } = useAuth();
 
   const stats = [
-    { label: 'Saved Searches', value: '5', icon: Search, color: 'text-blue-600' },
-    { label: 'Favorites', value: '12', icon: Heart, color: 'text-red-600' },
-    { label: 'Messages', value: '3', icon: MessageSquare, color: 'text-green-600' },
-    { label: 'Alerts', value: '2', icon: Bell, color: 'text-yellow-600' },
+    { label: t('dashboard.buyer.savedSearches'), value: '5', icon: Search, color: 'text-blue-600' },
+    { label: t('dashboard.buyer.favorites'), value: '12', icon: Heart, color: 'text-red-600' },
+    { label: t('dashboard.buyer.messages'), value: '3', icon: MessageSquare, color: 'text-green-600' },
+    { label: t('dashboard.buyer.alerts'), value: '2', icon: Bell, color: 'text-yellow-600' },
   ];
 
   const recentListings = [
@@ -24,10 +26,10 @@ const BuyerDashboard: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-black mb-2">
-            Welcome back, {user?.name}!
+            {t('dashboard.buyer.welcome', { name: user?.name })}
           </h1>
           <p className="text-gray-600">
-            Find your perfect companion from certified breeders
+            {t('dashboard.buyer.subtitle')}
           </p>
         </div>
 
@@ -55,9 +57,9 @@ const BuyerDashboard: React.FC = () => {
             className="bg-[#A8E6CF] hover:bg-[#70C1B3] p-6 rounded-lg text-center transition-colors group"
           >
             <Search className="w-12 h-12 text-black mx-auto mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-lg font-semibold text-black mb-2">Search Animals</h3>
+            <h3 className="text-lg font-semibold text-black mb-2">{t('dashboard.buyer.searchAnimals')}</h3>
             <p className="text-black text-opacity-80 text-sm">
-              Find your perfect companion
+              {t('dashboard.buyer.searchAnimalsDesc')}
             </p>
           </Link>
 
@@ -66,9 +68,9 @@ const BuyerDashboard: React.FC = () => {
             className="bg-white hover:bg-[#A8E6CF] hover:bg-opacity-20 p-6 rounded-lg text-center border-2 border-[#A8E6CF] transition-colors group"
           >
             <Heart className="w-12 h-12 text-black mx-auto mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-lg font-semibold text-black mb-2">My Favorites</h3>
+            <h3 className="text-lg font-semibold text-black mb-2">{t('dashboard.buyer.myFavorites')}</h3>
             <p className="text-gray-600 text-sm">
-              View your saved animals
+              {t('dashboard.buyer.myFavoritesDesc')}
             </p>
           </Link>
 
@@ -77,9 +79,9 @@ const BuyerDashboard: React.FC = () => {
             className="bg-white hover:bg-[#A8E6CF] hover:bg-opacity-20 p-6 rounded-lg text-center border-2 border-[#A8E6CF] transition-colors group"
           >
             <MessageSquare className="w-12 h-12 text-black mx-auto mb-4 group-hover:scale-110 transition-transform" />
-            <h3 className="text-lg font-semibold text-black mb-2">Messaging</h3>
+            <h3 className="text-lg font-semibold text-black mb-2">{t('dashboard.buyer.messaging')}</h3>
             <p className="text-gray-600 text-sm">
-              Chat with breeders
+              {t('dashboard.buyer.messagingDesc')}
             </p>
           </Link>
         </div>
@@ -87,7 +89,7 @@ const BuyerDashboard: React.FC = () => {
         {/* Recent Listings */}
         <div className="bg-white rounded-lg border-2 border-[#A8E6CF] shadow-sm">
           <div className="p-6 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-black">New Listings Near You</h2>
+            <h2 className="text-xl font-semibold text-black">{t('dashboard.buyer.newListings')}</h2>
           </div>
           <div className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -112,7 +114,7 @@ const BuyerDashboard: React.FC = () => {
                         </button>
                         <button className="bg-[#A8E6CF] text-black px-3 py-1 rounded text-sm hover:bg-[#70C1B3] transition-colors flex items-center">
                           <ShoppingCart className="w-4 h-4 mr-1" />
-                          Réserver
+                          {t('dashboard.buyer.reserve')}
                         </button>
                       </div>
                     </div>
