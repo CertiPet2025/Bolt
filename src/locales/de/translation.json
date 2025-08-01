@@ -137,6 +137,7 @@
   "postAnimal": {
     "title": "Tier inserieren",
     "subtitle": "Erstellen Sie eine neue Anzeige für Ihr Tier",
+    "successMessage": "Tieranzeige erfolgreich erstellt!",
     "animalType": "Tierart",
     "dog": "Hund",
     "cat": "Katze",

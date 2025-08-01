@@ -137,6 +137,7 @@
   "postAnimal": {
     "title": "Pubblica Animale",
     "subtitle": "Crea un nuovo annuncio per il tuo animale",
+    "successMessage": "Annuncio animale creato con successo!",
     "animalType": "Tipo di Animale",
     "dog": "Cane",
     "cat": "Gatto",

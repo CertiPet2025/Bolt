@@ -137,6 +137,7 @@
   "postAnimal": {
     "title": "Post an Animal",
     "subtitle": "Create a new listing for your animal",
+    "successMessage": "Animal listing created successfully!",
     "animalType": "Animal Type",
     "dog": "Dog",
     "cat": "Cat",

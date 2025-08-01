@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Upload, Save, X } from 'lucide-react';
 
 const PostAnimal: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [animalType, setAnimalType] = useState<'cat' | 'dog'>('dog');
   const [formData, setFormData] = useState({
@@ -47,7 +49,7 @@ const PostAnimal: React.FC = () => {
     e.preventDefault();
     // Simulate saving the animal listing
     console.log('Animal listing submitted:', { formData, files, animalType });
-    alert('Animal listing created successfully!');
+    alert(t('postAnimal.successMessage'));
     navigate('/breeder/listings');
   };
 
@@ -64,7 +66,7 @@ const PostAnimal: React.FC = () => {
   }) => (
     <div>
       <label className="block text-sm font-medium text-black mb-2">
-        {label} {required && <span className="text-red-500">*</span>}
+        {t(label)} {required && <span className="text-red-500">*</span>}
       </label>
       <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#A8E6CF] transition-colors">
         <input
@@ -78,7 +80,7 @@ const PostAnimal: React.FC = () => {
         <label htmlFor={fileType} className="cursor-pointer">
           <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
           <p className="text-sm text-gray-600">
-            {files[fileType] ? files[fileType]!.name : 'Click to upload file'}
+            {files[fileType] ? files[fileType]!.name : t('postAnimal.clickUpload')}
           </p>
         </label>
       </div>
@@ -89,14 +91,14 @@ const PostAnimal: React.FC = () => {
     <div className="min-h-screen bg-white py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-black mb-2">Post an Animal</h1>
-          <p className="text-gray-600">Create a new listing for your animal</p>
+          <h1 className="text-3xl font-bold text-black mb-2">{t('postAnimal.title')}</h1>
+          <p className="text-gray-600">{t('postAnimal.subtitle')}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Animal Type Toggle */}
           <div className="bg-white p-6 rounded-lg border-2 border-[#A8E6CF] shadow-sm">
-            <h2 className="text-xl font-semibold text-black mb-4">Animal Type</h2>
+            <h2 className="text-xl font-semibold text-black mb-4">{t('postAnimal.animalType')}</h2>
             <div className="flex space-x-4">
               <button
                 type="button"
@@ -107,7 +109,7 @@ const PostAnimal: React.FC = () => {
                     : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                 }`}
               >
-                Dog
+                {t('postAnimal.dog')}
               </button>
               <button
                 type="button"
@@ -118,18 +120,18 @@ const PostAnimal: React.FC = () => {
                     : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                 }`}
               >
-                Cat
+                {t('postAnimal.cat')}
               </button>
             </div>
           </div>
 
           {/* Basic Information */}
           <div className="bg-white p-6 rounded-lg border-2 border-[#A8E6CF] shadow-sm">
-            <h2 className="text-xl font-semibold text-black mb-6">Basic Information</h2>
+            <h2 className="text-xl font-semibold text-black mb-6">{t('postAnimal.basicInfo')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
-                  Animal Name <span className="text-red-500">*</span>
+                  {t('postAnimal.animalName')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -138,13 +140,13 @@ const PostAnimal: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                  placeholder="Enter animal name"
+                  placeholder={t('postAnimal.enterAnimalName')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
-                  Age <span className="text-red-500">*</span>
+                  {t('common.age')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -153,13 +155,13 @@ const PostAnimal: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                  placeholder="e.g., 8 weeks, 2 years"
+                  placeholder={t('postAnimal.enterAge')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
-                  Breed <span className="text-red-500">*</span>
+                  {t('common.breed')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -168,13 +170,13 @@ const PostAnimal: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                  placeholder="Enter breed"
+                  placeholder={t('postAnimal.enterBreed')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
-                  {animalType === 'cat' ? 'Cattery Name' : 'Kennel Name'} <span className="text-red-500">*</span>
+                  {animalType === 'cat' ? t('postAnimal.catteryName') : t('postAnimal.kennelName')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -183,13 +185,13 @@ const PostAnimal: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                  placeholder={`Enter ${animalType === 'cat' ? 'cattery' : 'kennel'} name`}
+                  placeholder={animalType === 'cat' ? t('postAnimal.enterCatteryName') : t('postAnimal.enterKennelName')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
-                  City <span className="text-red-500">*</span>
+                  {t('common.city')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -198,13 +200,13 @@ const PostAnimal: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                  placeholder="Enter city"
+                  placeholder={t('postAnimal.enterCity')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
-                  Country <span className="text-red-500">*</span>
+                  {t('common.country')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -213,13 +215,13 @@ const PostAnimal: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                  placeholder="Enter country"
+                  placeholder={t('postAnimal.enterCountry')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
-                  Price (€) <span className="text-red-500">*</span>
+                  {t('postAnimal.priceEuro')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="number"
@@ -229,13 +231,13 @@ const PostAnimal: React.FC = () => {
                   required
                   min="0"
                   className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                  placeholder="Enter price in euros"
+                  placeholder={t('postAnimal.enterPrice')}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
-                  Microchip Number <span className="text-red-500">*</span>
+                  {t('postAnimal.microchipNumber')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -244,14 +246,14 @@ const PostAnimal: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                  placeholder="Enter microchip number"
+                  placeholder={t('postAnimal.enterMicrochip')}
                 />
               </div>
             </div>
 
             <div className="mt-6">
               <label className="block text-sm font-medium text-black mb-2">
-                Description <span className="text-red-500">*</span>
+                {t('common.description')} <span className="text-red-500">*</span>
               </label>
               <textarea
                 name="description"
@@ -260,18 +262,18 @@ const PostAnimal: React.FC = () => {
                 required
                 rows={4}
                 className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                placeholder="Describe the animal's temperament, characteristics, and any special notes"
+                placeholder={t('postAnimal.descriptionPlaceholder')}
               />
             </div>
           </div>
 
           {/* Legal Information */}
           <div className="bg-white p-6 rounded-lg border-2 border-[#A8E6CF] shadow-sm">
-            <h2 className="text-xl font-semibold text-black mb-6">Legal Information</h2>
+            <h2 className="text-xl font-semibold text-black mb-6">{t('postAnimal.legalInfo')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-black mb-2">
-                  Breeder SIRET Number <span className="text-red-500">*</span>
+                  {t('postAnimal.siretNumber')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -280,7 +282,7 @@ const PostAnimal: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
-                  placeholder="Enter SIRET number"
+                  placeholder={t('postAnimal.enterSiret')}
                 />
               </div>
 
@@ -294,7 +296,7 @@ const PostAnimal: React.FC = () => {
                       onChange={handleInputChange}
                       className="h-4 w-4 text-[#A8E6CF] focus:ring-[#A8E6CF] border-gray-300 rounded"
                     />
-                    <label className="ml-2 text-sm text-black">Health Certificate Available</label>
+                    <label className="ml-2 text-sm text-black">{t('postAnimal.healthCertificate')}</label>
                   </div>
                   <div className="flex items-center">
                     <input
@@ -304,7 +306,7 @@ const PostAnimal: React.FC = () => {
                       onChange={handleInputChange}
                       className="h-4 w-4 text-[#A8E6CF] focus:ring-[#A8E6CF] border-gray-300 rounded"
                     />
-                    <label className="ml-2 text-sm text-black">Vaccinated</label>
+                    <label className="ml-2 text-sm text-black">{t('postAnimal.vaccinated')}</label>
                   </div>
                 </div>
               </div>
@@ -313,33 +315,33 @@ const PostAnimal: React.FC = () => {
 
           {/* File Uploads */}
           <div className="bg-white p-6 rounded-lg border-2 border-[#A8E6CF] shadow-sm">
-            <h2 className="text-xl font-semibold text-black mb-6">Required Documents</h2>
+            <h2 className="text-xl font-semibold text-black mb-6">{t('postAnimal.requiredDocuments')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FileUploadField
-                label="Animal Photo"
+                label="postAnimal.animalPhoto"
                 fileType="photo"
                 required
                 accept="image/jpeg,image/jpg"
               />
               <FileUploadField
-                label="ACACED Certificate"
+                label="postAnimal.acacedCertificate"
                 fileType="acacedCertificate"
                 required
                 accept=".pdf,.jpg,.jpeg,.png"
               />
               <FileUploadField
-                label="LOOF Certificate / Birth Declaration"
+                label="postAnimal.loofCertificate"
                 fileType="loofCertificate"
                 accept=".pdf,.jpg,.jpeg,.png"
               />
               <FileUploadField
-                label="ICAD Certificate"
+                label="postAnimal.icadCertificate"
                 fileType="icadCertificate"
                 required
                 accept=".pdf,.jpg,.jpeg,.png"
               />
               <FileUploadField
-                label="Certificat Vétérinaire de Santé"
+                label="postAnimal.healthCertificateDoc"
                 fileType="healthCertificate"
                 required
                 accept=".pdf,.jpg,.jpeg,.png"
@@ -351,18 +353,18 @@ const PostAnimal: React.FC = () => {
           <div className="flex justify-end space-x-4 pt-6">
             <button
               type="button"
-              onClick={() => navigate('/breeder/dashboard')}
+              onClick={() => navigate(-1)}
               className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center"
             >
               <X className="w-5 h-5 mr-2" />
-              Cancel
+              {t('common.cancel')}
             </button>
             <button
               type="submit"
               className="px-6 py-3 bg-[#A8E6CF] text-black rounded-lg hover:bg-[#70C1B3] transition-colors flex items-center"
             >
               <Save className="w-5 h-5 mr-2" />
-              Create Listing
+              {t('postAnimal.createListing')}
             </button>
           </div>
         </form>
