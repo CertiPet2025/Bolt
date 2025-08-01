@@ -12,7 +12,7 @@ import SearchAnimals from './pages/SearchAnimals';
 import MyFavorites from './pages/MyFavorites';
 import Messaging from './pages/Messaging';
 import Contact from './pages/Contact';
-import About from './pages/About';
+// import About from './pages/About';
 import AnimalReservation from './pages/AnimalReservation';
 import { AuthProvider } from './context/AuthContext';
 import HelpBot from './components/HelpBot';
@@ -36,7 +36,7 @@ function App() {
             <Route path="/animal/:id/reserve" element={<AnimalReservation />} />
             <Route path="/messaging" element={<Messaging />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
+            {/* <Route path="/about" element={<About />} /> */}
           </Routes>
           <HelpBot />
         </div>
