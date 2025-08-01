@@ -14,12 +14,12 @@ import Messaging from './pages/Messaging';
 import Contact from './pages/Contact';
 // import About from './pages/About';
 import AnimalReservation from './pages/AnimalReservation';
-// import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import HelpBot from './components/HelpBot';
 
 function App() {
   return (
-    // <AuthProvider>
+    <AuthProvider>
       <Router>
         <div className="min-h-screen bg-white">
           <Navbar />
@@ -41,7 +41,7 @@ function App() {
           <HelpBot />
         </div>
       </Router>
-    // </AuthProvider>
+    </AuthProvider>
   );
 }
 
