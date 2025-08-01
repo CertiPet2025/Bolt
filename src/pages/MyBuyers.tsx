@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MessageSquare, Phone, Mail, Calendar, User, Heart } from 'lucide-react';
 
 const MyBuyers: React.FC = () => {
+  const { t } = useTranslation();
   const [buyers] = useState([
     {
       id: 1,
@@ -71,23 +73,23 @@ const MyBuyers: React.FC = () => {
     <div className="min-h-screen bg-white py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-black mb-2">My Buyers</h1>
-          <p className="text-gray-600">Manage your potential buyers and inquiries</p>
+          <h1 className="text-3xl font-bold text-black mb-2">{t('myBuyers.title')}</h1>
+          <p className="text-gray-600">{t('myBuyers.subtitle')}</p>
         </div>
 
         {/* Statistics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white p-6 rounded-lg border-2 border-[#A8E6CF] shadow-sm">
             <div className="text-2xl font-bold text-green-600">{buyers.filter(b => b.status === 'active').length}</div>
-            <div className="text-gray-600 text-sm">Active Inquiries</div>
+            <div className="text-gray-600 text-sm">{t('myBuyers.activeInquiries')}</div>
           </div>
           <div className="bg-white p-6 rounded-lg border-2 border-[#A8E6CF] shadow-sm">
             <div className="text-2xl font-bold text-yellow-600">{buyers.filter(b => b.status === 'pending').length}</div>
-            <div className="text-gray-600 text-sm">Pending Responses</div>
+            <div className="text-gray-600 text-sm">{t('myBuyers.pendingResponses')}</div>
           </div>
           <div className="bg-white p-6 rounded-lg border-2 border-[#A8E6CF] shadow-sm">
             <div className="text-2xl font-bold text-blue-600">{buyers.filter(b => b.status === 'completed').length}</div>
-            <div className="text-gray-600 text-sm">Completed Sales</div>
+            <div className="text-gray-600 text-sm">{t('myBuyers.completedSales')}</div>
           </div>
         </div>
 
@@ -106,11 +108,11 @@ const MyBuyers: React.FC = () => {
                     <h3 className="text-xl font-semibold text-black">{buyer.name}</h3>
                     <div className="flex items-center text-gray-600 text-sm mt-1">
                       <Heart className="w-4 h-4 mr-1" />
-                      Interested in: {buyer.interestedAnimal}
+                      {t('myBuyers.interestedIn', { animal: buyer.interestedAnimal })}
                     </div>
                     <div className="flex items-center text-gray-500 text-sm mt-1">
                       <Calendar className="w-4 h-4 mr-1" />
-                      Inquiry date: {new Date(buyer.inquiryDate).toLocaleDateString()}
+                      {t('myBuyers.inquiryDate', { date: new Date(buyer.inquiryDate).toLocaleDateString() })}
                     </div>
                   </div>
                 </div>
@@ -131,22 +133,22 @@ const MyBuyers: React.FC = () => {
                 </div>
                 <div className="flex items-center text-gray-600">
                   <MessageSquare className="w-4 h-4 mr-2" />
-                  <span className="text-sm">{buyer.messages} messages</span>
+                  <span className="text-sm">{t('myBuyers.messagesCount', { count: buyer.messages })}</span>
                 </div>
               </div>
 
               <div className="mt-6 flex justify-between items-center">
                 <span className="text-sm text-gray-500">
-                  Last contact: {buyer.lastContact}
+                  {t('myBuyers.lastContact', { time: buyer.lastContact })}
                 </span>
                 <div className="flex space-x-3">
                   <button className="bg-[#A8E6CF] text-black px-4 py-2 rounded-md hover:bg-[#70C1B3] transition-colors text-sm font-medium flex items-center">
                     <MessageSquare className="w-4 h-4 mr-1" />
-                    Message
+                    {t('myBuyers.message')}
                   </button>
                   <button className="border-2 border-[#A8E6CF] text-black px-4 py-2 rounded-md hover:bg-[#A8E6CF] hover:bg-opacity-20 transition-colors text-sm font-medium flex items-center">
                     <Phone className="w-4 h-4 mr-1" />
-                    Call
+                    {t('myBuyers.call')}
                   </button>
                 </div>
               </div>
@@ -160,8 +162,8 @@ const MyBuyers: React.FC = () => {
             <div className="w-16 h-16 bg-[#A8E6CF] bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
               <User className="w-8 h-8 text-[#70C1B3]" />
             </div>
-            <h3 className="text-lg font-medium text-black mb-2">No buyers yet</h3>
-            <p className="text-gray-600 mb-6">When people show interest in your animals, they'll appear here</p>
+            <h3 className="text-lg font-medium text-black mb-2">{t('myBuyers.noBuyers')}</h3>
+            <p className="text-gray-600 mb-6">{t('myBuyers.noBuyersDesc')}</p>
           </div>
         )}
       </div>
