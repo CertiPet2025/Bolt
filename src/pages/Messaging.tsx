@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Send, Search, Plus, Phone, Video, MoreVertical, Camera, Image, Play } from 'lucide-react';
+import { Send, Search, Plus, Phone, Video, MoreVertical, Camera, Image, Play, X, Download } from 'lucide-react';
 
 const Messaging: React.FC = () => {
   const [selectedConversation, setSelectedConversation] = useState(1);
   const [newMessage, setNewMessage] = useState('');
   const [showMediaOptions, setShowMediaOptions] = useState(false);
+  const [uploadingMedia, setUploadingMedia] = useState(false);
 
   const conversations = [
     {
@@ -55,35 +56,50 @@ const Messaging: React.FC = () => {
       senderId: 1,
       text: "Hi! I'm interested in Luna, the Golden Retriever. Is she still available?",
       time: '2:25 PM',
-      type: 'received'
+      type: 'received',
+      messageType: 'text'
     },
     {
       id: 2,
       senderId: 'me',
       text: "Hello Sarah! Yes, Luna is still available. She's a beautiful 8-week-old puppy with all her vaccinations up to date.",
       time: '2:27 PM',
-      type: 'sent'
+      type: 'sent',
+      messageType: 'text'
     },
     {
       id: 3,
       senderId: 1,
       text: "That's wonderful! Could you tell me more about her temperament and health certificates?",
       time: '2:28 PM',
-      type: 'received'
+      type: 'received',
+      messageType: 'text'
     },
     {
       id: 4,
       senderId: 'me',
       text: "Luna is very friendly and social. She loves playing with children and other dogs. She has her health certificate, LOOF registration, and microchip. All documents are ready for transfer.",
       time: '2:29 PM',
-      type: 'sent'
+      type: 'sent',
+      messageType: 'text'
     },
     {
       id: 5,
+      senderId: 'me',
+      text: "",
+      time: '2:29 PM',
+      type: 'sent',
+      messageType: 'image',
+      mediaUrl: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=600',
+      mediaName: 'luna_playing.jpg'
+    },
+    {
+      id: 6,
       senderId: 1,
       text: "Is Luna still available?",
       time: '2:30 PM',
-      type: 'received'
+      type: 'received',
+      messageType: 'text'
     },
   ];
 
@@ -93,6 +109,100 @@ const Messaging: React.FC = () => {
       console.log('Sending message:', newMessage);
       setNewMessage('');
     }
+  };
+
+  const handleMediaUpload = async (event: React.ChangeEvent<HTMLInputElement>, mediaType: 'image' | 'video') => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file size (max 10MB for images, 50MB for videos)
+    const maxSize = mediaType === 'image' ? 10 * 1024 * 1024 : 50 * 1024 * 1024;
+    if (file.size > maxSize) {
+      alert(`File size too large. Maximum ${mediaType === 'image' ? '10MB' : '50MB'} allowed.`);
+      return;
+    }
+
+    // Validate file type
+    const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+    const validVideoTypes = ['video/mp4', 'video/webm', 'video/ogg'];
+    const validTypes = mediaType === 'image' ? validImageTypes : validVideoTypes;
+    
+    if (!validTypes.includes(file.type)) {
+      alert(`Invalid file type. Please select a valid ${mediaType} file.`);
+      return;
+    }
+
+    setUploadingMedia(true);
+    setShowMediaOptions(false);
+
+    try {
+      // Convert file to base64 for temporary storage
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64Data = e.target?.result as string;
+        
+        // Simulate sending media message
+        console.log('Sending media message:', {
+          type: mediaType,
+          fileName: file.name,
+          fileSize: file.size,
+          data: base64Data
+        });
+        
+        // In a real app, you would upload to a server here
+        setTimeout(() => {
+          setUploadingMedia(false);
+          alert(`${mediaType === 'image' ? 'Photo' : 'Video'} sent successfully!`);
+        }, 1500);
+      };
+      
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error uploading media:', error);
+      setUploadingMedia(false);
+      alert('Error uploading file. Please try again.');
+    }
+
+    // Reset input
+    event.target.value = '';
+  };
+
+  const MediaMessage: React.FC<{ message: any }> = ({ message }) => {
+    if (message.messageType === 'image') {
+      return (
+        <div className="relative group">
+          <img
+            src={message.mediaUrl}
+            alt={message.mediaName || 'Shared image'}
+            className="max-w-xs rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+            onClick={() => window.open(message.mediaUrl, '_blank')}
+          />
+          <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              onClick={() => window.open(message.mediaUrl, '_blank')}
+              className="bg-black bg-opacity-50 text-white p-1 rounded-full hover:bg-opacity-70 transition-colors"
+            >
+              <Download className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    if (message.messageType === 'video') {
+      return (
+        <video
+          src={message.mediaUrl}
+          controls
+          className="max-w-xs rounded-lg"
+          preload="metadata"
+        >
+          Your browser does not support the video tag.
+        </video>
+      );
+    }
+
+    return null;
   };
 
   const selectedConversationData = conversations.find(c => c.id === selectedConversation);
@@ -213,11 +323,29 @@ const Messaging: React.FC = () => {
                           : 'bg-gray-100 text-black'
                       }`}
                     >
-                      <p className="text-sm">{message.text}</p>
+                      {message.messageType === 'text' ? (
+                        <p className="text-sm">{message.text}</p>
+                      ) : (
+                        <MediaMessage message={message} />
+                      )}
+                      {message.text && message.messageType !== 'text' && (
+                        <p className="text-sm mt-2">{message.text}</p>
+                      )}
                       <p className="text-xs opacity-70 mt-1">{message.time}</p>
                     </div>
                   </div>
                 ))}
+                
+                {uploadingMedia && (
+                  <div className="flex justify-end">
+                    <div className="bg-[#A8E6CF] text-black px-4 py-2 rounded-lg max-w-xs">
+                      <div className="flex items-center space-x-2">
+                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-transparent"></div>
+                        <span className="text-sm">Uploading...</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Message Input */}
@@ -226,25 +354,47 @@ const Messaging: React.FC = () => {
                   <div className="relative">
                     <button 
                       onClick={() => setShowMediaOptions(!showMediaOptions)}
-                      className="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+                      className={`p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors ${
+                        uploadingMedia ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
+                      disabled={uploadingMedia}
                     >
-                    <Plus className="w-5 h-5" />
+                      <Plus className="w-5 h-5" />
                     </button>
                     
                     {showMediaOptions && (
-                      <div className="absolute bottom-full left-0 mb-2 bg-white border border-gray-200 rounded-lg shadow-lg p-2 space-y-1">
-                        <button className="flex items-center space-x-2 w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+                      <div className="absolute bottom-full left-0 mb-2 bg-white border border-gray-200 rounded-lg shadow-lg p-2 space-y-1 z-10">
+                        <label className="flex items-center space-x-2 w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded cursor-pointer">
                           <Image className="w-4 h-4" />
                           <span>Photo</span>
-                        </button>
-                        <button className="flex items-center space-x-2 w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+                          <input
+                            type="file"
+                            accept="image/jpeg,image/jpg,image/png,image/gif"
+                            onChange={(e) => handleMediaUpload(e, 'image')}
+                            className="hidden"
+                          />
+                        </label>
+                        <label className="flex items-center space-x-2 w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded cursor-pointer">
                           <Play className="w-4 h-4" />
-                          <span>Vidéo</span>
-                        </button>
-                        <button className="flex items-center space-x-2 w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
+                          <span>Video</span>
+                          <input
+                            type="file"
+                            accept="video/mp4,video/webm,video/ogg"
+                            onChange={(e) => handleMediaUpload(e, 'video')}
+                            className="hidden"
+                          />
+                        </label>
+                        <label className="flex items-center space-x-2 w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded cursor-pointer">
                           <Camera className="w-4 h-4" />
-                          <span>Caméra</span>
-                        </button>
+                          <span>Camera</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            capture="environment"
+                            onChange={(e) => handleMediaUpload(e, 'image')}
+                            className="hidden"
+                          />
+                        </label>
                       </div>
                     )}
                   </div>
@@ -255,12 +405,16 @@ const Messaging: React.FC = () => {
                       onChange={(e) => setNewMessage(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                       placeholder="Type a message..."
+                      disabled={uploadingMedia}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
                     />
                   </div>
                   <button
                     onClick={handleSendMessage}
-                    className="bg-[#A8E6CF] text-black p-2 rounded-full hover:bg-[#70C1B3] transition-colors"
+                    disabled={uploadingMedia}
+                    className={`bg-[#A8E6CF] text-black p-2 rounded-full hover:bg-[#70C1B3] transition-colors ${
+                      uploadingMedia ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
                   >
                     <Send className="w-5 h-5" />
                   </button>
