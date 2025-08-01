@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Search, Filter, MapPin, Heart, Star, Euro } from 'lucide-react';
 
 const SearchAnimals: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [filters, setFilters] = useState({
     animalType: '',
@@ -174,7 +176,7 @@ const SearchAnimals: React.FC = () => {
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
-            {animal.availabilityConfirmed ? 'Réserver' : 'En attente de confirmation'}
+            {animal.availabilityConfirmed ? t('searchAnimals.reserve') : t('searchAnimals.awaitingConfirmation')}
           </button>
         </div>
       </div>
@@ -185,8 +187,8 @@ const SearchAnimals: React.FC = () => {
     <div className="min-h-screen bg-white py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-black mb-2">Search Animals</h1>
-          <p className="text-gray-600">Find your perfect companion from certified breeders</p>
+          <h1 className="text-3xl font-bold text-black mb-2">{t('searchAnimals.title')}</h1>
+          <p className="text-gray-600">{t('searchAnimals.subtitle')}</p>
         </div>
 
         {/* Search Bar */}
@@ -197,7 +199,7 @@ const SearchAnimals: React.FC = () => {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search by breed, name, or location..."
+              placeholder={t('searchAnimals.searchPlaceholder')}
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
             />
             <button
@@ -205,7 +207,7 @@ const SearchAnimals: React.FC = () => {
               className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2 text-gray-600 hover:text-[#70C1B3] transition-colors"
             >
               <Filter className="w-5 h-5" />
-              <span className="text-sm">Filters</span>
+              <span className="text-sm">{t('searchAnimals.filters')}</span>
             </button>
           </div>
         </div>
@@ -213,65 +215,65 @@ const SearchAnimals: React.FC = () => {
         {/* Filters */}
         {showFilters && (
           <div className="mb-8 p-6 bg-white border-2 border-[#A8E6CF] rounded-lg">
-            <h3 className="text-lg font-semibold text-black mb-4">Filter Results</h3>
+            <h3 className="text-lg font-semibold text-black mb-4">{t('searchAnimals.filterResults')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
               <div>
-                <label className="block text-sm font-medium text-black mb-2">Animal Type</label>
+                <label className="block text-sm font-medium text-black mb-2">{t('searchAnimals.animalType')}</label>
                 <select
                   value={filters.animalType}
                   onChange={(e) => handleFilterChange('animalType', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
                 >
-                  <option value="">All</option>
-                  <option value="dog">Dogs</option>
-                  <option value="cat">Cats</option>
+                  <option value="">{t('searchAnimals.all')}</option>
+                  <option value="dog">{t('searchAnimals.dogs')}</option>
+                  <option value="cat">{t('searchAnimals.cats')}</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-black mb-2">Breed</label>
+                <label className="block text-sm font-medium text-black mb-2">{t('searchAnimals.breed')}</label>
                 <input
                   type="text"
                   value={filters.breed}
                   onChange={(e) => handleFilterChange('breed', e.target.value)}
-                  placeholder="Enter breed"
+                  placeholder={t('searchAnimals.enterBreed')}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-black mb-2">Age Range</label>
+                <label className="block text-sm font-medium text-black mb-2">{t('searchAnimals.ageRange')}</label>
                 <select
                   value={filters.ageRange}
                   onChange={(e) => handleFilterChange('ageRange', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
                 >
-                  <option value="">All Ages</option>
-                  <option value="puppy">Puppy/Kitten (0-6 months)</option>
-                  <option value="young">Young (6-18 months)</option>
-                  <option value="adult">Adult (18+ months)</option>
+                  <option value="">{t('searchAnimals.allAges')}</option>
+                  <option value="puppy">{t('searchAnimals.puppyKitten')}</option>
+                  <option value="young">{t('searchAnimals.young')}</option>
+                  <option value="adult">{t('searchAnimals.adult')}</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-black mb-2">Location</label>
+                <label className="block text-sm font-medium text-black mb-2">{t('common.location')}</label>
                 <input
                   type="text"
                   value={filters.location}
                   onChange={(e) => handleFilterChange('location', e.target.value)}
-                  placeholder="City or region"
+                  placeholder={t('searchAnimals.cityRegion')}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-black mb-2">Price Range</label>
+                <label className="block text-sm font-medium text-black mb-2">{t('searchAnimals.priceRange')}</label>
                 <select
                   value={filters.priceRange}
                   onChange={(e) => handleFilterChange('priceRange', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]"
                 >
-                  <option value="">All Prices</option>
+                  <option value="">{t('searchAnimals.allPrices')}</option>
                   <option value="0-500">€0 - €500</option>
                   <option value="500-1000">€500 - €1,000</option>
                   <option value="1000-1500">€1,000 - €1,500</option>
@@ -285,13 +287,13 @@ const SearchAnimals: React.FC = () => {
         {/* Results Count */}
         <div className="mb-6 flex justify-between items-center">
           <p className="text-gray-600">
-            {mockAnimals.length} animals found
+            {t('searchAnimals.animalsFound', { count: mockAnimals.length })}
           </p>
           <select className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A8E6CF] focus:border-[#A8E6CF]">
-            <option>Sort by: Most Recent</option>
-            <option>Sort by: Price (Low to High)</option>
-            <option>Sort by: Price (High to Low)</option>
-            <option>Sort by: Rating</option>
+            <option>{t('searchAnimals.sortBy')} {t('searchAnimals.mostRecent')}</option>
+            <option>{t('searchAnimals.sortBy')} {t('searchAnimals.priceLowHigh')}</option>
+            <option>{t('searchAnimals.sortBy')} {t('searchAnimals.priceHighLow')}</option>
+            <option>{t('searchAnimals.sortBy')} {t('searchAnimals.rating')}</option>
           </select>
         </div>
 
@@ -305,7 +307,7 @@ const SearchAnimals: React.FC = () => {
         {/* Load More */}
         <div className="text-center mt-12">
           <button className="bg-[#A8E6CF] text-black px-8 py-3 rounded-lg hover:bg-[#70C1B3] transition-colors font-medium">
-            Load More Animals
+            {t('searchAnimals.loadMore')}
           </button>
         </div>
       </div>
