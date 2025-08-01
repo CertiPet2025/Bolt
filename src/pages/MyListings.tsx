@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Edit, Trash2, Eye, MessageSquare, Euro, MapPin } from 'lucide-react';
 
 const MyListings: React.FC = () => {
-  const [listings] = useState([
+  const { t } = useTranslation();
+  const [listings, setListings] = useState([
     {
       id: 1,
       name: 'Luna',
@@ -71,6 +73,14 @@ const MyListings: React.FC = () => {
       default:
         return status;
     }
+  };
+
+  const handleConfirmAvailability = (listingId: number) => {
+    setListings(prev => prev.map(listing => 
+      listing.id === listingId 
+        ? { ...listing, availabilityConfirmed: true }
+        : listing
+    ));
   };
 
   return (
@@ -148,6 +158,18 @@ const MyListings: React.FC = () => {
                             <MapPin className="w-3 h-3 mr-1" />
                             {listing.location}
                           </div>
+                          {!listing.availabilityConfirmed && listing.status === 'active' && (
+                            <div className="flex items-center text-xs text-orange-600 mt-1">
+                              <span className="w-2 h-2 bg-orange-500 rounded-full mr-1"></span>
+                              {t('myListings.awaitingConfirmation')}
+                            </div>
+                          )}
+                          {listing.availabilityConfirmed && listing.status === 'active' && (
+                            <div className="flex items-center text-xs text-green-600 mt-1">
+                              <span className="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                              {t('myListings.availabilityConfirmed')}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </td>
@@ -177,8 +199,11 @@ const MyListings: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-2">
                         {!listing.availabilityConfirmed && listing.status === 'active' && (
-                          <button className="bg-[#A8E6CF] text-black px-3 py-1 rounded text-xs hover:bg-[#70C1B3] transition-colors">
-                            Confirmer Disponibilité
+                          <button 
+                            onClick={() => handleConfirmAvailability(listing.id)}
+                            className="bg-[#A8E6CF] text-black px-3 py-1 rounded text-xs hover:bg-[#70C1B3] transition-colors"
+                          >
+                            {t('myListings.confirmAvailability')}
                           </button>
                         )}
                         <button className="text-[#70C1B3] hover:text-[#A8E6CF] transition-colors">

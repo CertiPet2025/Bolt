@@ -162,6 +162,13 @@ const SearchAnimals: React.FC = () => {
           By {animal.breeder}
         </div>
         
+        {!animal.availabilityConfirmed && (
+          <div className="flex items-center text-xs text-orange-600 mb-3">
+            <span className="w-2 h-2 bg-orange-500 rounded-full mr-1"></span>
+            {t('searchAnimals.pendingConfirmation')}
+          </div>
+        )}
+        
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <Euro className="w-4 h-4 text-[#70C1B3]" />
@@ -169,14 +176,17 @@ const SearchAnimals: React.FC = () => {
           </div>
           <button
             onClick={() => navigate(`/animal/${animal.id}/reserve`)}
-            disabled={!animal.availabilityConfirmed}
+            disabled={!animal.availabilityConfirmed || animal.status !== 'available'}
             className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              animal.availabilityConfirmed 
+              animal.availabilityConfirmed && animal.status === 'available'
                 ? 'bg-[#A8E6CF] text-black hover:bg-[#70C1B3]' 
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
-            {animal.availabilityConfirmed ? t('searchAnimals.reserve') : t('searchAnimals.awaitingConfirmation')}
+            {animal.availabilityConfirmed && animal.status === 'available' 
+              ? t('searchAnimals.reserve') 
+              : t('searchAnimals.awaitingConfirmation')
+            }
           </button>
         </div>
       </div>
