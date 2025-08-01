@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HandHeart, Truck, CheckCircle } from 'lucide-react';
+import { Handshake, Truck, CheckCircle } from 'lucide-react';
 
 interface TransactionFinalizationProps {
   onFinalize: (method: 'handover' | 'delivery') => void;
@@ -51,7 +51,7 @@ const TransactionFinalization: React.FC<TransactionFinalizationProps> = ({ onFin
           onClick={() => handleFinalization('handover')}
           className="w-full p-4 border-2 border-[#A8E6CF] rounded-lg hover:bg-[#A8E6CF] hover:bg-opacity-20 transition-colors flex items-center justify-center space-x-3"
         >
-          <HandHeart className="w-6 h-6 text-[#70C1B3]" />
+          <Handshake className="w-6 h-6 text-[#70C1B3]" />
           <span className="font-medium text-black">Animal remis en main propre</span>
         </button>
 
