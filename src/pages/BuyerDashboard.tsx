@@ -115,7 +115,6 @@ const BuyerDashboard: React.FC = () => {
                           Réserver
                         </button>
                       </div>
-                      </button>
                     </div>
                   </div>
                 </div>
