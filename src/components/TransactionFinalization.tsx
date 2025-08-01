@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Handshake, Truck, CheckCircle } from 'lucide-react';
+import { HeartHandshake as Handshake, Truck, CheckCircle } from 'lucide-react';
 
 interface TransactionFinalizationProps {
   onFinalize: (method: 'handover' | 'delivery') => void;
