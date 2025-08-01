@@ -186,6 +186,8 @@
     "inquiries": "Inquiries",
     "actions": "Actions",
     "confirmAvailability": "Confirm Availability",
+    "awaitingConfirmation": "Awaiting confirmation",
+    "availabilityConfirmed": "Availability confirmed",
     "noListings": "No listings yet",
     "noListingsDesc": "Start by creating your first animal listing",
     "createFirst": "Create First Listing"
@@ -233,7 +235,6 @@
     "rating": "Rating",
     "reserve": "Reserve",
     "awaitingConfirmation": "Awaiting confirmation",
-    "pendingConfirmation": "Pending confirmation",
     "loadMore": "Load More Animals"
   },
   "myFavorites": {

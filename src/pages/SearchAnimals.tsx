@@ -165,7 +165,7 @@ const SearchAnimals: React.FC = () => {
         {!animal.availabilityConfirmed && (
           <div className="flex items-center text-xs text-orange-600 mb-3">
             <span className="w-2 h-2 bg-orange-500 rounded-full mr-1"></span>
-            {t('searchAnimals.pendingConfirmation')}
+            {t('searchAnimals.awaitingConfirmation')}
           </div>
         )}
         

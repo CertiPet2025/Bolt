@@ -201,9 +201,9 @@ const MyListings: React.FC = () => {
                         {!listing.availabilityConfirmed && listing.status === 'active' && (
                           <button 
                             onClick={() => handleConfirmAvailability(listing.id)}
-                            className="bg-[#A8E6CF] text-black px-3 py-1 rounded text-xs hover:bg-[#70C1B3] transition-colors"
+                            className="bg-[#A8E6CF] text-black px-3 py-1 rounded text-xs hover:bg-[#70C1B3] transition-colors mr-2"
                           >
-                            {t('myListings.confirmAvailability')}
+                            Confirm Availability
                           </button>
                         )}
                         <button className="text-[#70C1B3] hover:text-[#A8E6CF] transition-colors">

@@ -186,6 +186,8 @@
     "inquiries": "Richieste",
     "actions": "Azioni",
     "confirmAvailability": "Conferma Disponibilità",
+    "awaitingConfirmation": "In attesa di conferma",
+    "availabilityConfirmed": "Disponibilità confermata",
     "noListings": "Nessun annuncio ancora",
     "noListingsDesc": "Inizia creando il tuo primo annuncio di animale",
     "createFirst": "Crea Primo Annuncio"

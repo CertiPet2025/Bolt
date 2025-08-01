@@ -186,6 +186,8 @@
     "inquiries": "Anfragen",
     "actions": "Aktionen",
     "confirmAvailability": "Verfügbarkeit bestätigen",
+    "awaitingConfirmation": "Warten auf Bestätigung",
+    "availabilityConfirmed": "Verfügbarkeit bestätigt",
     "noListings": "Noch keine Anzeigen",
     "noListingsDesc": "Beginnen Sie mit der Erstellung Ihrer ersten Tieranzeige",
     "createFirst": "Erste Anzeige erstellen"
