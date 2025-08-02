@@ -264,6 +264,7 @@ const Navbar: React.FC = () => {
               </Link>
 
               {isAuthenticated ? (
+                <>
                 {user?.type === 'admin' && (
                   <Link
                     to="/admin/dashboard"
@@ -279,6 +280,7 @@ const Navbar: React.FC = () => {
                 >
                   {t('common.logout')} ({user?.name})
                 </button>
+                </>
               ) : (
                 <div className="space-y-2 pt-2">
                   <Link
