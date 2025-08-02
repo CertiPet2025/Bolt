@@ -131,6 +131,14 @@ const Navbar: React.FC = () => {
                     Admin Panel
                   </Link>
                 )}
+                {user?.type === 'admin' && (
+                  <Link
+                    to="/admin/reviews"
+                    className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors text-sm"
+                  >
+                    Review Moderation
+                  </Link>
+                )}
                 <button
                   onClick={handleLogout}
                   className="bg-[#A8E6CF] text-black px-4 py-2 rounded-md hover:bg-[#70C1B3] transition-colors"
@@ -272,6 +280,15 @@ const Navbar: React.FC = () => {
                     onClick={() => setIsOpen(false)}
                   >
                     Admin Panel
+                  </Link>
+                )}
+                {user?.type === 'admin' && (
+                  <Link
+                    to="/admin/reviews"
+                    className="block px-3 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 mb-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Review Moderation
                   </Link>
                 )}
                 <button

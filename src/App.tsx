@@ -16,6 +16,8 @@ import Contact from './pages/Contact';
 import AnimalReservation from './pages/AnimalReservation';
 import AdminDashboard from './pages/AdminDashboard';
 import SubscriptionManagement from './pages/SubscriptionManagement';
+import BreederReviews from './pages/BreederReviews';
+import AdminReviewModeration from './pages/AdminReviewModeration';
 import CGV from './pages/CGV';
 import Charter from './pages/Charter';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -86,6 +88,16 @@ function App() {
             <Route path="/admin/dashboard" element={
               <ProtectedRoute requiredRole="admin">
                 <AdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/reviews" element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminReviewModeration />
+              </ProtectedRoute>
+            } />
+            <Route path="/breeder/:breederId/reviews" element={
+              <ProtectedRoute allowedRoles={['buyer', 'breeder']}>
+                <BreederReviews />
               </ProtectedRoute>
             } />
             {/* <Route path="/about" element={<About />} /> */}
