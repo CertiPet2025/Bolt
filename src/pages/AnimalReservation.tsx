@@ -15,6 +15,7 @@ const AnimalReservation: React.FC = () => {
   const [agreementSent, setAgreementSent] = useState(false);
   const [paymentComplete, setPaymentComplete] = useState(false);
   const [transactionFinalized, setTransactionFinalized] = useState(false);
+  const [escrowStatus, setEscrowStatus] = useState<'pending' | 'held' | 'released'>('pending');
 
   // Mock animal data
   const animal = {
@@ -63,11 +64,13 @@ const AnimalReservation: React.FC = () => {
 
   const handlePaymentComplete = () => {
     setPaymentComplete(true);
+    setEscrowStatus('held');
     setCurrentStep(4);
   };
 
   const handleTransactionFinalize = (method: 'handover' | 'delivery') => {
     setTransactionFinalized(true);
+    setEscrowStatus('released');
     alert(`Transaction finalisée via ${method === 'handover' ? 'remise en main propre' : 'livraison'} !`);
   };
 

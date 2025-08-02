@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreditCard, Smartphone, DollarSign, Shield } from 'lucide-react';
+import { CreditCard, Smartphone, DollarSign, Shield, Clock, CheckCircle } from 'lucide-react';
 
 interface PaymentSystemProps {
   amount: number;
@@ -10,6 +10,8 @@ const PaymentSystem: React.FC<PaymentSystemProps> = ({ amount, onPaymentComplete
   const [selectedMethod, setSelectedMethod] = useState('');
   const [paymentProcessing, setPaymentProcessing] = useState(false);
   const [paymentComplete, setPaymentComplete] = useState(false);
+  const [escrowStatus, setEscrowStatus] = useState<'pending' | 'held' | 'released'>('pending');
+  const [transactionId, setTransactionId] = useState<string>('');
 
   const paymentMethods = [
     { id: 'card', name: 'Carte Bancaire', icon: CreditCard, description: 'Visa, Mastercard, Amex' },
@@ -25,10 +27,20 @@ const PaymentSystem: React.FC<PaymentSystemProps> = ({ amount, onPaymentComplete
   const handlePayment = async () => {
     setPaymentProcessing(true);
     
-    // Simulate payment processing
+    // Simulate payment processing and escrow setup
     setTimeout(() => {
       setPaymentProcessing(false);
       setPaymentComplete(true);
+      setEscrowStatus('held');
+      setTransactionId(`TXN-${Date.now()}`);
+      
+      // Notify all parties about payment held in escrow
+      console.log('Payment held in escrow - notifications sent to:', {
+        buyer: 'Payment secured in escrow',
+        breeder: 'Payment received and held pending delivery',
+        admin: `Transaction ${transactionId} - Payment held in escrow`
+      });
+      
       onPaymentComplete();
     }, 2000);
   };
@@ -36,17 +48,33 @@ const PaymentSystem: React.FC<PaymentSystemProps> = ({ amount, onPaymentComplete
   if (paymentComplete) {
     return (
       <div className="bg-white p-8 rounded-lg border-2 border-[#A8E6CF] shadow-sm text-center">
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Shield className="w-8 h-8 text-green-600" />
+        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Clock className="w-8 h-8 text-blue-600" />
         </div>
-        <h3 className="text-2xl font-bold text-black mb-2">Paiement Accepté</h3>
+        <h3 className="text-2xl font-bold text-black mb-2">Paiement Sécurisé en Séquestre</h3>
         <p className="text-gray-600 mb-4">
-          Fonds sécurisés en séquestre - Ils seront libérés lors de la remise de l'animal
+          Votre paiement est sécurisé et sera libéré uniquement après confirmation de la remise de l'animal
         </p>
-        <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
-          <p className="text-green-800 font-medium">
-            ✅ {amount.toLocaleString()} € en attente de libération
+        
+        <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg mb-4">
+          <p className="text-blue-800 font-medium mb-2">
+            💰 {amount.toLocaleString()} € sécurisés en séquestre
           </p>
+          <p className="text-blue-700 text-sm">
+            Transaction ID: {transactionId}
+          </p>
+        </div>
+        
+        <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+          <h4 className="font-medium text-yellow-800 mb-2">Conditions de libération des fonds :</h4>
+          <div className="text-sm text-yellow-700 space-y-1">
+            <p>• ✋ Confirmation de remise en main propre par l'acheteur</p>
+            <p>• 🚚 OU confirmation de livraison par le transporteur</p>
+          </div>
+        </div>
+        
+        <div className="mt-4 text-xs text-gray-500">
+          <p>Les fonds sont protégés jusqu'à la confirmation de réception</p>
         </div>
       </div>
     );
