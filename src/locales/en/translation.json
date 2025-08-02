@@ -429,6 +429,39 @@
   "subscription": {
     "title": "Subscription Management",
     "subtitle": "Manage your subscription plan and access premium features",
+    "planDescriptions": {
+      "free": "Enjoy our free offer with up to 2 active listings.",
+      "pro": "Upgrade to Pro for only €9.99/month and benefit from unlimited listings, featured placement, a \"Certified Breeder\" badge, and a dedicated breeder page."
+    },
+    "confirmations": {
+      "proActivated": "Your Pro subscription has been successfully activated!",
+      "autoRenewed": "Your subscription has been automatically renewed. Thank you for your trust!",
+      "cancelled": "Your subscription has been cancelled. You can continue using the free plan.",
+      "planChanged": "The plan change has been processed."
+    },
+    "alerts": {
+      "paymentDeclined": "Payment declined. Please check your banking information and try again.",
+      "changeFailed": "Unable to change plan at the moment. Please try again later.",
+      "limitReached": "Listing limit reached for your free plan. Upgrade to Pro for unlimited listings.",
+      "congratulations": "Congratulations! You now have access to the Pro plan."
+    },
+    "notifications": {
+      "renewalDate": "Your subscription will be renewed on {{date}}.",
+      "paymentFailed": "Your payment failed. Please update your information.",
+      "welcomePro": "Congratulations! You now have access to the Pro plan."
+    },
+    "actions": {
+      "subscribe": "Subscribe",
+      "upgradeToPro": "Upgrade to Pro",
+      "cancelSubscription": "Cancel subscription",
+      "updatePayment": "Update my payment information",
+      "viewInvoices": "View my invoices"
+    },
+    "info": {
+      "securePayments": "All payments are secured via Stripe.",
+      "cancelAnytime": "You can cancel your subscription at any time from your personal space.",
+      "supportContact": "If you have any problems, contact our customer support."
+    },
     "currentSubscription": "Current Subscription",
     "choosePlan": "Choose a Plan",
     "backToDashboard": "Back to dashboard",

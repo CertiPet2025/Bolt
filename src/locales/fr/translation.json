@@ -429,6 +429,39 @@
   "subscription": {
     "title": "Gestion de l'Abonnement",
     "subtitle": "Gérez votre plan d'abonnement et accédez à des fonctionnalités premium",
+    "planDescriptions": {
+      "free": "Profitez de notre offre gratuite avec jusqu'à 2 annonces actives.",
+      "pro": "Passez à la formule Pro pour seulement 9,99 € / mois et bénéficiez d'annonces illimitées, d'une mise en avant, d'un badge « Éleveur certifié » et d'une page dédiée à votre élevage."
+    },
+    "confirmations": {
+      "proActivated": "Votre abonnement Pro a été activé avec succès !",
+      "autoRenewed": "Votre abonnement a été renouvelé automatiquement. Merci de votre confiance !",
+      "cancelled": "Votre abonnement a été annulé. Vous pouvez continuer à utiliser la formule gratuite.",
+      "planChanged": "Le changement de formule a été pris en compte."
+    },
+    "alerts": {
+      "paymentDeclined": "Paiement refusé. Veuillez vérifier vos informations bancaires et réessayer.",
+      "changeFailed": "Impossible de changer de formule pour le moment. Merci de réessayer plus tard.",
+      "limitReached": "Limite d'annonces atteinte pour votre formule gratuite. Passez à Pro pour bénéficier d'annonces illimitées.",
+      "congratulations": "Félicitations ! Vous bénéficiez désormais de la formule Pro."
+    },
+    "notifications": {
+      "renewalDate": "Votre abonnement sera renouvelé le {{date}}.",
+      "paymentFailed": "Votre paiement a échoué. Merci de mettre à jour vos informations.",
+      "welcomePro": "Félicitations ! Vous bénéficiez désormais de la formule Pro."
+    },
+    "actions": {
+      "subscribe": "S'abonner",
+      "upgradeToPro": "Passer à Pro",
+      "cancelSubscription": "Résilier l'abonnement",
+      "updatePayment": "Mettre à jour mes informations de paiement",
+      "viewInvoices": "Voir mes factures"
+    },
+    "info": {
+      "securePayments": "Tous les paiements sont sécurisés via Stripe.",
+      "cancelAnytime": "Vous pouvez résilier votre abonnement à tout moment depuis votre espace personnel.",
+      "supportContact": "En cas de problème, contactez notre support client."
+    },
     "currentSubscription": "Abonnement Actuel",
     "choosePlan": "Choisir un Plan",
     "backToDashboard": "Retour au tableau de bord",
