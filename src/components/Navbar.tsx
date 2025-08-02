@@ -123,6 +123,14 @@ const Navbar: React.FC = () => {
             {isAuthenticated ? (
               <div className="flex items-center space-x-4">
                 <span className="text-black">{t('common.welcome')}, {user?.name}</span>
+                {user?.type === 'admin' && (
+                  <Link
+                    to="/admin/dashboard"
+                    className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors text-sm"
+                  >
+                    Admin Panel
+                  </Link>
+                )}
                 <button
                   onClick={handleLogout}
                   className="bg-[#A8E6CF] text-black px-4 py-2 rounded-md hover:bg-[#70C1B3] transition-colors"
@@ -256,6 +264,15 @@ const Navbar: React.FC = () => {
               </Link>
 
               {isAuthenticated ? (
+                {user?.type === 'admin' && (
+                  <Link
+                    to="/admin/dashboard"
+                    className="block px-3 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 mb-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Admin Panel
+                  </Link>
+                )}
                 <button
                   onClick={handleLogout}
                   className="block w-full text-left px-3 py-2 text-black hover:bg-[#A8E6CF] rounded-md"

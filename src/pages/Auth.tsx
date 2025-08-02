@@ -33,13 +33,20 @@ const Auth: React.FC = () => {
       id: '1',
       name: formData.name || 'User',
       email: formData.email,
-      type: type as 'breeder' | 'buyer',
+      type: type as 'breeder' | 'buyer' | 'admin',
     };
+    
+    // Special case: if email contains "admin", assign admin role
+    if (formData.email.toLowerCase().includes('admin')) {
+      userData.type = 'admin';
+    }
     
     login(userData);
     
     // Redirect to appropriate dashboard
-    if (type === 'breeder') {
+    if (userData.type === 'admin') {
+      navigate('/admin/dashboard');
+    } else if (type === 'breeder') {
       navigate('/breeder/dashboard');
     } else {
       navigate('/buyer/dashboard');

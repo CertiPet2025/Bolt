@@ -16,6 +16,7 @@ import Contact from './pages/Contact';
 import AnimalReservation from './pages/AnimalReservation';
 import AdminDashboard from './pages/AdminDashboard';
 import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 import HelpBot from './components/HelpBot';
 
 function App() {
@@ -27,17 +28,53 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth/:type" element={<Auth />} />
-            <Route path="/breeder/dashboard" element={<BreederDashboard />} />
-            <Route path="/breeder/post-animal" element={<PostAnimal />} />
-            <Route path="/breeder/listings" element={<MyListings />} />
-            <Route path="/breeder/buyers" element={<MyBuyers />} />
-            <Route path="/buyer/dashboard" element={<BuyerDashboard />} />
-            <Route path="/buyer/search" element={<SearchAnimals />} />
-            <Route path="/buyer/favorites" element={<MyFavorites />} />
+            <Route path="/breeder/dashboard" element={
+              <ProtectedRoute requiredRole="breeder">
+                <BreederDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/breeder/post-animal" element={
+              <ProtectedRoute requiredRole="breeder">
+                <PostAnimal />
+              </ProtectedRoute>
+            } />
+            <Route path="/breeder/listings" element={
+              <ProtectedRoute requiredRole="breeder">
+                <MyListings />
+              </ProtectedRoute>
+            } />
+            <Route path="/breeder/buyers" element={
+              <ProtectedRoute requiredRole="breeder">
+                <MyBuyers />
+              </ProtectedRoute>
+            } />
+            <Route path="/buyer/dashboard" element={
+              <ProtectedRoute requiredRole="buyer">
+                <BuyerDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/buyer/search" element={
+              <ProtectedRoute requiredRole="buyer">
+                <SearchAnimals />
+              </ProtectedRoute>
+            } />
+            <Route path="/buyer/favorites" element={
+              <ProtectedRoute requiredRole="buyer">
+                <MyFavorites />
+              </ProtectedRoute>
+            } />
             <Route path="/animal/:id/reserve" element={<AnimalReservation />} />
-            <Route path="/messaging" element={<Messaging />} />
+            <Route path="/messaging" element={
+              <ProtectedRoute allowedRoles={['breeder', 'buyer']}>
+                <Messaging />
+              </ProtectedRoute>
+            } />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/dashboard" element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
             {/* <Route path="/about" element={<About />} /> */}
           </Routes>
           <HelpBot />

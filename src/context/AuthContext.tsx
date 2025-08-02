@@ -4,7 +4,7 @@ interface User {
   id: string;
   name: string;
   email: string;
-  type: 'breeder' | 'buyer';
+  type: 'breeder' | 'buyer' | 'admin';
 }
 
 interface AuthContextType {
