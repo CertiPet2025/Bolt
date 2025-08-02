@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Send, Search, Plus, Phone, Video, MoreVertical, Camera, Image, Play, X, Download } from 'lucide-react';
+import { Send, Search, Plus, Phone, Video, MoreVertical, Camera, Image, Play, X, Download, AlertCircle } from 'lucide-react';
 
 const Messaging: React.FC = () => {
   const [selectedConversation, setSelectedConversation] = useState(1);
   const [newMessage, setNewMessage] = useState('');
   const [showMediaOptions, setShowMediaOptions] = useState(false);
   const [uploadingMedia, setUploadingMedia] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadError, setUploadError] = useState('');
 
   const conversations = [
     {
@@ -101,6 +103,17 @@ const Messaging: React.FC = () => {
       type: 'received',
       messageType: 'text'
     },
+    {
+      id: 7,
+      senderId: 'me',
+      text: "Here's a recent video of Luna playing in the garden",
+      time: '2:31 PM',
+      type: 'sent',
+      messageType: 'video',
+      mediaUrl: 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4',
+      mediaName: 'luna_playing.mp4',
+      mediaThumbnail: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=300'
+    },
   ];
 
   const handleSendMessage = () => {
@@ -114,11 +127,13 @@ const Messaging: React.FC = () => {
   const handleMediaUpload = async (event: React.ChangeEvent<HTMLInputElement>, mediaType: 'image' | 'video') => {
     const file = event.target.files?.[0];
     if (!file) return;
+    
+    setUploadError('');
 
     // Validate file size (max 10MB for images, 50MB for videos)
     const maxSize = mediaType === 'image' ? 10 * 1024 * 1024 : 50 * 1024 * 1024;
     if (file.size > maxSize) {
-      alert(`File size too large. Maximum ${mediaType === 'image' ? '10MB' : '50MB'} allowed.`);
+      setUploadError(`File size too large. Maximum ${mediaType === 'image' ? '10MB' : '50MB'} allowed.`);
       return;
     }
 
@@ -128,14 +143,26 @@ const Messaging: React.FC = () => {
     const validTypes = mediaType === 'image' ? validImageTypes : validVideoTypes;
     
     if (!validTypes.includes(file.type)) {
-      alert(`Invalid file type. Please select a valid ${mediaType} file.`);
+      setUploadError(`Invalid file type. Please select a valid ${mediaType} file.`);
       return;
     }
 
     setUploadingMedia(true);
     setShowMediaOptions(false);
+    setUploadProgress(0);
 
     try {
+      // Simulate upload progress
+      const progressInterval = setInterval(() => {
+        setUploadProgress(prev => {
+          if (prev >= 90) {
+            clearInterval(progressInterval);
+            return 90;
+          }
+          return prev + 10;
+        });
+      }, 100);
+
       // Convert file to base64 for temporary storage
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -151,6 +178,8 @@ const Messaging: React.FC = () => {
         
         // In a real app, you would upload to a server here
         setTimeout(() => {
+          clearInterval(progressInterval);
+          setUploadProgress(100);
           setUploadingMedia(false);
           alert(`${mediaType === 'image' ? 'Photo' : 'Video'} sent successfully!`);
         }, 1500);
@@ -160,7 +189,8 @@ const Messaging: React.FC = () => {
     } catch (error) {
       console.error('Error uploading media:', error);
       setUploadingMedia(false);
-      alert('Error uploading file. Please try again.');
+      setUploadProgress(0);
+      setUploadError('Error uploading file. Please try again.');
     }
 
     // Reset input
@@ -170,11 +200,11 @@ const Messaging: React.FC = () => {
   const MediaMessage: React.FC<{ message: any }> = ({ message }) => {
     if (message.messageType === 'image') {
       return (
-        <div className="relative group">
+        <div className="relative group max-w-xs">
           <img
             src={message.mediaUrl}
             alt={message.mediaName || 'Shared image'}
-            className="max-w-xs rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+            className="w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
             onClick={() => window.open(message.mediaUrl, '_blank')}
           />
           <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -191,14 +221,35 @@ const Messaging: React.FC = () => {
 
     if (message.messageType === 'video') {
       return (
-        <video
-          src={message.mediaUrl}
-          controls
-          className="max-w-xs rounded-lg"
-          preload="metadata"
-        >
-          Your browser does not support the video tag.
-        </video>
+        <div className="relative max-w-xs">
+          {message.mediaThumbnail ? (
+            <div className="relative">
+              <img
+                src={message.mediaThumbnail}
+                alt="Video thumbnail"
+                className="w-full h-auto rounded-lg"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 rounded-lg">
+                <div className="bg-white bg-opacity-90 rounded-full p-3">
+                  <Play className="w-6 h-6 text-black" />
+                </div>
+              </div>
+              <button
+                onClick={() => window.open(message.mediaUrl, '_blank')}
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          ) : (
+            <video
+              src={message.mediaUrl}
+              controls
+              className="w-full h-auto rounded-lg"
+              preload="metadata"
+            >
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </div>
       );
     }
 
@@ -341,7 +392,13 @@ const Messaging: React.FC = () => {
                     <div className="bg-[#A8E6CF] text-black px-4 py-2 rounded-lg max-w-xs">
                       <div className="flex items-center space-x-2">
                         <div className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-transparent"></div>
-                        <span className="text-sm">Uploading...</span>
+                        <span className="text-sm">Uploading... {uploadProgress}%</span>
+                      </div>
+                      <div className="mt-2 w-full bg-black bg-opacity-20 rounded-full h-1">
+                        <div 
+                          className="bg-black h-1 rounded-full transition-all duration-300"
+                          style={{ width: `${uploadProgress}%` }}
+                        />
                       </div>
                     </div>
                   </div>
@@ -350,6 +407,19 @@ const Messaging: React.FC = () => {
 
               {/* Message Input */}
               <div className="p-4 border-t border-gray-200">
+                {uploadError && (
+                  <div className="mb-3 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-2">
+                    <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0" />
+                    <span className="text-sm text-red-700">{uploadError}</span>
+                    <button
+                      onClick={() => setUploadError('')}
+                      className="ml-auto text-red-500 hover:text-red-700"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+                
                 <div className="flex items-center space-x-4">
                   <div className="relative">
                     <button 
@@ -372,6 +442,7 @@ const Messaging: React.FC = () => {
                             accept="image/jpeg,image/jpg,image/png,image/gif"
                             onChange={(e) => handleMediaUpload(e, 'image')}
                             className="hidden"
+                            disabled={uploadingMedia}
                           />
                         </label>
                         <label className="flex items-center space-x-2 w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded cursor-pointer">
@@ -382,6 +453,7 @@ const Messaging: React.FC = () => {
                             accept="video/mp4,video/webm,video/ogg"
                             onChange={(e) => handleMediaUpload(e, 'video')}
                             className="hidden"
+                            disabled={uploadingMedia}
                           />
                         </label>
                         <label className="flex items-center space-x-2 w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded cursor-pointer">
@@ -393,6 +465,7 @@ const Messaging: React.FC = () => {
                             capture="environment"
                             onChange={(e) => handleMediaUpload(e, 'image')}
                             className="hidden"
+                            disabled={uploadingMedia}
                           />
                         </label>
                       </div>
