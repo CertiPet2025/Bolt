@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, CreditCard, AlertTriangle, CheckCircle } from 'lucide-react';
+import { ArrowLeft, CreditCard, AlertTriangle, CheckCircle, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import SubscriptionCard from '../components/SubscriptionCard';
 import SubscriptionStatus from '../components/SubscriptionStatus';
