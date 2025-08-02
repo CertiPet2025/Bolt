@@ -6,6 +6,11 @@ interface User {
   email: string;
   type: 'breeder' | 'buyer' | 'admin';
   legalConsentTimestamp?: string;
+  subscription?: {
+    planId: 'free' | 'pro';
+    status: 'active' | 'canceled' | 'past_due' | 'incomplete';
+    currentPeriodEnd: string;
+  };
 }
 
 interface AuthContextType {

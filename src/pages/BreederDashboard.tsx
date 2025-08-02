@@ -1,12 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Plus, List, Users, MessageSquare, TrendingUp, Eye, CheckCircle, DollarSign } from 'lucide-react';
+import { Plus, List, Users, MessageSquare, TrendingUp, Eye, CheckCircle, DollarSign, Crown, AlertTriangle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const BreederDashboard: React.FC = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
+
+  // Mock subscription data - in real app this would come from API
+  const subscription = user?.subscription || {
+    planId: 'free' as const,
+    status: 'active' as const,
+    currentPeriodEnd: '2024-02-01T00:00:00Z'
+  };
+
+  const isProPlan = subscription.planId === 'pro';
+  const maxListings = isProPlan ? 'unlimited' : 2;
+  const currentListings = 12; // Mock data
 
   const stats = [
     { label: t('dashboard.breeder.activeListings'), value: '12', icon: List, color: 'text-blue-600' },
@@ -54,6 +65,61 @@ const BreederDashboard: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Subscription Status */}
+        <div className="mb-8">
+          <div className={`p-6 rounded-lg border-2 shadow-sm ${
+            isProPlan 
+              ? 'border-[#A8E6CF] bg-gradient-to-r from-[#A8E6CF]/10 to-white' 
+              : 'border-gray-200 bg-white'
+          }`}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                {isProPlan ? (
+                  <Crown className="w-6 h-6 text-[#70C1B3] mr-3" />
+                ) : (
+                  <div className="w-6 h-6 bg-gray-300 rounded-full mr-3" />
+                )}
+                <div>
+                  <h3 className="text-lg font-bold text-black">
+                    {t(`subscription.plans.${subscription.planId}.name`)}
+                  </h3>
+                  <p className="text-gray-600 text-sm">
+                    {isProPlan 
+                      ? t('subscription.nextBilling') + ': ' + new Date(subscription.currentPeriodEnd).toLocaleDateString()
+                      : t('subscription.features.maxListings', { count: maxListings })
+                    }
+                  </p>
+                </div>
+              </div>
+              
+              <Link
+                to="/breeder/subscription"
+                className={`px-4 py-2 rounded-md font-medium transition-colors ${
+                  isProPlan
+                    ? 'bg-white border-2 border-[#A8E6CF] text-black hover:bg-[#A8E6CF]'
+                    : 'bg-[#A8E6CF] text-black hover:bg-[#70C1B3]'
+                }`}
+              >
+                {isProPlan ? t('subscription.manage') : t('subscription.upgrade')}
+              </Link>
+            </div>
+            
+            {!isProPlan && currentListings >= 2 && (
+              <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <div className="flex items-center">
+                  <AlertTriangle className="w-5 h-5 text-yellow-600 mr-2" />
+                  <p className="text-yellow-800 text-sm font-medium">
+                    {t('subscription.listingLimitReached')}
+                  </p>
+                </div>
+                <p className="text-yellow-700 text-sm mt-1">
+                  {t('subscription.upgradeToAddMore')}
+                </p>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Commission Summary */}

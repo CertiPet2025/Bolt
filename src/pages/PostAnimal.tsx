@@ -6,6 +6,7 @@ import { Upload, Save, X } from 'lucide-react';
 const PostAnimal: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [animalType, setAnimalType] = useState<'cat' | 'dog'>('dog');
   const [formData, setFormData] = useState({
     name: '',
@@ -30,6 +31,14 @@ const PostAnimal: React.FC = () => {
     healthCertificate: null as File | null,
   });
 
+  // Mock subscription and listing data
+  const subscription = user?.subscription || { planId: 'free' as const };
+  const isProPlan = subscription.planId === 'pro';
+  const maxListings = isProPlan ? 'unlimited' : 2;
+  const currentListings = 2; // Mock current listing count
+  
+  const canCreateListing = isProPlan || currentListings < 2;
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
     if (type === 'checkbox') {
@@ -47,6 +56,14 @@ const PostAnimal: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Check listing limits
+    if (!canCreateListing) {
+      alert(t('subscription.listingLimitReached'));
+      navigate('/breeder/subscription');
+      return;
+    }
+    
     // Simulate saving the animal listing
     console.log('Animal listing submitted:', { formData, files, animalType });
     alert(t('postAnimal.successMessage'));
@@ -94,6 +111,28 @@ const PostAnimal: React.FC = () => {
           <h1 className="text-3xl font-bold text-black mb-2">{t('postAnimal.title')}</h1>
           <p className="text-gray-600">{t('postAnimal.subtitle')}</p>
         </div>
+
+        {/* Listing Limit Warning */}
+        {!isProPlan && (
+          <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-yellow-800 font-medium text-sm">
+                  {t('subscription.freeListingLimit', { current: currentListings, max: maxListings })}
+                </p>
+                <p className="text-yellow-700 text-sm mt-1">
+                  {t('subscription.upgradeForUnlimited')}
+                </p>
+              </div>
+              <Link
+                to="/breeder/subscription"
+                className="bg-[#A8E6CF] text-black px-4 py-2 rounded-md hover:bg-[#70C1B3] transition-colors text-sm font-medium"
+              >
+                {t('subscription.upgrade')}
+              </Link>
+            </div>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Animal Type Toggle */}

@@ -15,6 +15,7 @@ import Contact from './pages/Contact';
 // import About from './pages/About';
 import AnimalReservation from './pages/AnimalReservation';
 import AdminDashboard from './pages/AdminDashboard';
+import SubscriptionManagement from './pages/SubscriptionManagement';
 import CGV from './pages/CGV';
 import Charter from './pages/Charter';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -50,6 +51,11 @@ function App() {
             <Route path="/breeder/buyers" element={
               <ProtectedRoute requiredRole="breeder">
                 <MyBuyers />
+              </ProtectedRoute>
+            } />
+            <Route path="/breeder/subscription" element={
+              <ProtectedRoute requiredRole="breeder">
+                <SubscriptionManagement />
               </ProtectedRoute>
             } />
             <Route path="/buyer/dashboard" element={

@@ -426,6 +426,67 @@
     "pendingResponse": "Pending Response",
     "saleCompleted": "Sale Completed"
   },
+  "subscription": {
+    "title": "Subscription Management",
+    "subtitle": "Manage your subscription plan and access premium features",
+    "currentSubscription": "Current Subscription",
+    "choosePlan": "Choose a Plan",
+    "backToDashboard": "Back to dashboard",
+    "recommended": "Recommended",
+    "free": "Free",
+    "month": "month",
+    "manage": "Manage",
+    "upgrade": "Upgrade to Pro",
+    "currentPlan": "Current Plan",
+    "selectFree": "Select Free",
+    "upgradeToPro": "Upgrade to Pro",
+    "processing": "Processing...",
+    "nextBilling": "Next billing",
+    "monthlyPrice": "Monthly price",
+    "paymentFailed": "Payment failed",
+    "updatePaymentMethod": "Please update your payment method",
+    "cancelingAtPeriodEnd": "Canceling at period end",
+    "accessUntil": "Access until {{date}}",
+    "monthlyBilling": "Monthly billing",
+    "confirmUpgrade": "Confirm Upgrade",
+    "upgradeSuccess": "Successfully upgraded to Pro plan!",
+    "upgradeError": "Error upgrading subscription. Please try again.",
+    "confirmDowngrade": "Are you sure you want to downgrade to the free plan?",
+    "downgradeSuccess": "Successfully downgraded to free plan.",
+    "downgradeError": "Error downgrading subscription. Please try again.",
+    "dangerZone": "Danger Zone",
+    "cancelSubscription": "Cancel subscription",
+    "cancelDescription": "Your subscription will be canceled at the end of the current billing period",
+    "confirmCancel": "Are you sure you want to cancel your subscription?",
+    "cancelSuccess": "Subscription canceled successfully.",
+    "cancelError": "Error canceling subscription. Please try again.",
+    "cancel": "Cancel",
+    "listingLimitReached": "Listing limit reached",
+    "upgradeToAddMore": "Upgrade to Pro to add more listings",
+    "freeListingLimit": "Free plan: {{current}}/{{max}} listings used",
+    "upgradeForUnlimited": "Upgrade to Pro for unlimited listings",
+    "plans": {
+      "free": {
+        "name": "Free Plan"
+      },
+      "pro": {
+        "name": "Pro Plan"
+      }
+    },
+    "features": {
+      "maxListings": "{{count}} listings maximum",
+      "unlimitedListings": "Unlimited listings",
+      "featuredListings": "Featured listings",
+      "certifiedBadge": "\"Certified Breeder\" badge",
+      "dedicatedPage": "Dedicated breeder page"
+    },
+    "status": {
+      "active": "Active",
+      "canceled": "Canceled",
+      "past_due": "Past Due",
+      "incomplete": "Incomplete"
+    }
+  },
   "legal": {
     "lastUpdated": "Last updated",
     "contact": "Contact",

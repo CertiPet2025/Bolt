@@ -426,6 +426,67 @@
     "pendingResponse": "Réponse en attente",
     "saleCompleted": "Vente terminée"
   },
+  "subscription": {
+    "title": "Gestion de l'Abonnement",
+    "subtitle": "Gérez votre plan d'abonnement et accédez à des fonctionnalités premium",
+    "currentSubscription": "Abonnement Actuel",
+    "choosePlan": "Choisir un Plan",
+    "backToDashboard": "Retour au tableau de bord",
+    "recommended": "Recommandé",
+    "free": "Gratuit",
+    "month": "mois",
+    "manage": "Gérer",
+    "upgrade": "Passer au Pro",
+    "currentPlan": "Plan Actuel",
+    "selectFree": "Sélectionner Gratuit",
+    "upgradeToPro": "Passer au Pro",
+    "processing": "Traitement...",
+    "nextBilling": "Prochaine facturation",
+    "monthlyPrice": "Prix mensuel",
+    "paymentFailed": "Échec du paiement",
+    "updatePaymentMethod": "Veuillez mettre à jour votre méthode de paiement",
+    "cancelingAtPeriodEnd": "Annulation à la fin de la période",
+    "accessUntil": "Accès jusqu'au {{date}}",
+    "monthlyBilling": "Facturation mensuelle",
+    "confirmUpgrade": "Confirmer la mise à niveau",
+    "upgradeSuccess": "Mise à niveau réussie vers le plan Pro !",
+    "upgradeError": "Erreur lors de la mise à niveau. Veuillez réessayer.",
+    "confirmDowngrade": "Êtes-vous sûr de vouloir passer au plan gratuit ?",
+    "downgradeSuccess": "Rétrogradation réussie vers le plan gratuit.",
+    "downgradeError": "Erreur lors de la rétrogradation. Veuillez réessayer.",
+    "dangerZone": "Zone de Danger",
+    "cancelSubscription": "Annuler l'abonnement",
+    "cancelDescription": "Votre abonnement sera annulé à la fin de la période de facturation actuelle",
+    "confirmCancel": "Êtes-vous sûr de vouloir annuler votre abonnement ?",
+    "cancelSuccess": "Abonnement annulé avec succès.",
+    "cancelError": "Erreur lors de l'annulation. Veuillez réessayer.",
+    "cancel": "Annuler",
+    "listingLimitReached": "Limite d'annonces atteinte",
+    "upgradeToAddMore": "Passez au plan Pro pour ajouter plus d'annonces",
+    "freeListingLimit": "Plan gratuit : {{current}}/{{max}} annonces utilisées",
+    "upgradeForUnlimited": "Passez au Pro pour des annonces illimitées",
+    "plans": {
+      "free": {
+        "name": "Plan Gratuit"
+      },
+      "pro": {
+        "name": "Plan Pro"
+      }
+    },
+    "features": {
+      "maxListings": "{{count}} annonces maximum",
+      "unlimitedListings": "Annonces illimitées",
+      "featuredListings": "Annonces mises en avant",
+      "certifiedBadge": "Badge \"Éleveur certifié\"",
+      "dedicatedPage": "Page dédiée d'éleveur"
+    },
+    "status": {
+      "active": "Actif",
+      "canceled": "Annulé",
+      "past_due": "Paiement en retard",
+      "incomplete": "Incomplet"
+    }
+  },
   "legal": {
     "lastUpdated": "Dernière mise à jour",
     "contact": "Contact",
