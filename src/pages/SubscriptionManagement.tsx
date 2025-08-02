@@ -60,11 +60,11 @@ const SubscriptionManagement: React.FC = () => {
       console.log('Creating Stripe subscription for Pro plan');
       console.log('Legal consent recorded:', new Date().toISOString());
       
-      alert(t('subscription.upgradeSuccess'));
+      alert(t('subscription.confirmations.proActivated'));
       navigate('/breeder/dashboard');
     } catch (error) {
       console.error('Subscription upgrade failed:', error);
-      alert(t('subscription.upgradeError'));
+      alert(t('subscription.alerts.changeFailed'));
     } finally {
       setLoading(false);
     }
@@ -79,11 +79,11 @@ const SubscriptionManagement: React.FC = () => {
         await new Promise(resolve => setTimeout(resolve, 1000));
         console.log('Downgrading to free plan');
         
-        alert(t('subscription.downgradeSuccess'));
+        alert(t('subscription.confirmations.cancelled'));
         navigate('/breeder/dashboard');
       } catch (error) {
         console.error('Subscription downgrade failed:', error);
-        alert(t('subscription.downgradeError'));
+        alert(t('subscription.alerts.changeFailed'));
       } finally {
         setLoading(false);
       }
@@ -99,11 +99,11 @@ const SubscriptionManagement: React.FC = () => {
         await new Promise(resolve => setTimeout(resolve, 1000));
         console.log('Canceling subscription at period end');
         
-        alert(t('subscription.cancelSuccess'));
+        alert(t('subscription.confirmations.cancelled'));
         window.location.reload();
       } catch (error) {
         console.error('Subscription cancellation failed:', error);
-        alert(t('subscription.cancelError'));
+        alert(t('subscription.alerts.changeFailed'));
       } finally {
         setLoading(false);
       }
@@ -173,6 +173,7 @@ const SubscriptionManagement: React.FC = () => {
                       <span className="font-medium text-black">{t('subscription.monthlyBilling')}</span>
                     </div>
                     <p className="text-2xl font-bold text-[#70C1B3]">9.99€ / {t('subscription.month')}</p>
+                    <p className="text-xs text-gray-600 mt-2">{t('subscription.info.securePayments')}</p>
                   </div>
 
                   <div className="space-y-2 text-sm text-gray-600">
@@ -231,11 +232,17 @@ const SubscriptionManagement: React.FC = () => {
                 disabled={loading}
                 className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors text-sm font-medium disabled:opacity-50"
               >
-                {t('subscription.cancel')}
+                {t('subscription.actions.cancelSubscription')}
               </button>
             </div>
+            <p className="text-xs text-gray-500 mt-2">{t('subscription.info.cancelAnytime')}</p>
           </div>
         )}
+        
+        {/* Support Information */}
+        <div className="mt-8 text-center">
+          <p className="text-sm text-gray-600">{t('subscription.info.supportContact')}</p>
+        </div>
       </div>
     </div>
   );

@@ -59,7 +59,7 @@ const PostAnimal: React.FC = () => {
     
     // Check listing limits
     if (!canCreateListing) {
-      alert(t('subscription.listingLimitReached'));
+      alert(t('subscription.alerts.limitReached'));
       navigate('/breeder/subscription');
       return;
     }

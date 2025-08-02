@@ -111,11 +111,11 @@ const BreederDashboard: React.FC = () => {
                 <div className="flex items-center">
                   <AlertTriangle className="w-5 h-5 text-yellow-600 mr-2" />
                   <p className="text-yellow-800 text-sm font-medium">
-                    {t('subscription.listingLimitReached')}
+                    {t('subscription.alerts.limitReached')}
                   </p>
                 </div>
                 <p className="text-yellow-700 text-sm mt-1">
-                  {t('subscription.upgradeToAddMore')}
+                  {t('subscription.actions.upgradeToPro')}
                 </p>
               </div>
             )}

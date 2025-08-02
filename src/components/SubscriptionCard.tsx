@@ -46,6 +46,10 @@ const SubscriptionCard: React.FC<SubscriptionCardProps> = ({
           <h3 className="text-2xl font-bold text-black">{t(`subscription.plans.${plan.id}.name`)}</h3>
         </div>
         
+        <p className="text-gray-600 text-sm mb-4 px-2">
+          {t(`subscription.planDescriptions.${plan.id}`)}
+        </p>
+        
         <div className="mb-4">
           <span className="text-4xl font-bold text-[#70C1B3]">
             {plan.price === 0 ? t('subscription.free') : `${plan.price}€`}

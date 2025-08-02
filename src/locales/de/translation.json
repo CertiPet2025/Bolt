@@ -207,6 +207,66 @@
     "noBuyers": "Noch keine Käufer",
     "noBuyersDesc": "Wenn Personen Interesse an Ihren Tieren zeigen, erscheinen sie hier"
   },
+  "subscription": {
+    "title": "Abonnement-Verwaltung",
+    "subtitle": "Verwalten Sie Ihren Abonnement-Plan und greifen Sie auf Premium-Funktionen zu",
+    "planDescriptions": {
+      "free": "Genießen Sie unser kostenloses Angebot mit bis zu 2 aktiven Anzeigen.",
+      "pro": "Upgraden Sie auf Pro für nur 9,99 €/Monat und profitieren Sie von unbegrenzten Anzeigen, hervorgehobener Platzierung, einem \"Zertifizierter Züchter\" Badge und einer dedizierten Züchterseite."
+    },
+    "confirmations": {
+      "proActivated": "Ihr Pro-Abonnement wurde erfolgreich aktiviert!",
+      "autoRenewed": "Ihr Abonnement wurde automatisch verlängert. Vielen Dank für Ihr Vertrauen!",
+      "cancelled": "Ihr Abonnement wurde gekündigt. Sie können weiterhin den kostenlosen Plan nutzen.",
+      "planChanged": "Die Planänderung wurde verarbeitet."
+    },
+    "alerts": {
+      "paymentDeclined": "Zahlung abgelehnt. Bitte überprüfen Sie Ihre Bankdaten und versuchen Sie es erneut.",
+      "changeFailed": "Plan kann momentan nicht geändert werden. Bitte versuchen Sie es später erneut.",
+      "limitReached": "Anzeigenlimit für Ihren kostenlosen Plan erreicht. Upgraden Sie auf Pro für unbegrenzte Anzeigen.",
+      "congratulations": "Herzlichen Glückwunsch! Sie haben jetzt Zugang zum Pro-Plan."
+    },
+    "notifications": {
+      "renewalDate": "Ihr Abonnement wird am {{date}} verlängert.",
+      "paymentFailed": "Ihre Zahlung ist fehlgeschlagen. Bitte aktualisieren Sie Ihre Informationen.",
+      "welcomePro": "Herzlichen Glückwunsch! Sie haben jetzt Zugang zum Pro-Plan."
+    },
+    "actions": {
+      "subscribe": "Abonnieren",
+      "upgradeToPro": "Auf Pro upgraden",
+      "cancelSubscription": "Abonnement kündigen",
+      "updatePayment": "Meine Zahlungsinformationen aktualisieren",
+      "viewInvoices": "Meine Rechnungen anzeigen"
+    },
+    "info": {
+      "securePayments": "Alle Zahlungen sind über Stripe gesichert.",
+      "cancelAnytime": "Sie können Ihr Abonnement jederzeit von Ihrem persönlichen Bereich aus kündigen.",
+      "supportContact": "Bei Problemen wenden Sie sich an unseren Kundensupport."
+    },
+    "currentSubscription": "Aktuelles Abonnement",
+    "freePlan": "Kostenloser Plan",
+    "proPlan": "Pro-Plan",
+    "monthlyBilling": "Monatliche Abrechnung",
+    "yearlyBilling": "Jährliche Abrechnung",
+    "nextBilling": "Nächste Abrechnung: {{date}}",
+    "features": "Funktionen",
+    "unlimited": "Unbegrenzt",
+    "limited": "Begrenzt auf {{count}}",
+    "activeListings": "Aktive Anzeigen",
+    "prioritySupport": "Prioritätssupport",
+    "featuredListings": "Hervorgehobene Anzeigen",
+    "analytics": "Erweiterte Analysen",
+    "customBranding": "Benutzerdefiniertes Branding",
+    "upgrade": "Upgraden",
+    "downgrade": "Downgraden",
+    "manage": "Verwalten",
+    "billingHistory": "Abrechnungsverlauf",
+    "paymentMethod": "Zahlungsmethode",
+    "updatePaymentMethod": "Zahlungsmethode aktualisieren",
+    "cancelSubscription": "Abonnement kündigen",
+    "confirmCancellation": "Sind Sie sicher, dass Sie Ihr Abonnement kündigen möchten?",
+    "cancellationNote": "Sie können weiterhin alle Pro-Funktionen bis zum Ende Ihres aktuellen Abrechnungszeitraums nutzen."
+  },
   "searchAnimals": {
     "title": "Tiere suchen",
     "subtitle": "Finden Sie Ihren perfekten Begleiter von zertifizierten Züchtern",
@@ -354,52 +414,6 @@
     "cancelReservationAnswer": "Stornierungsbedingungen sind im generierten Kaufvertrag definiert.",
     "personalizedHelp": "Brauchen Sie persönliche Hilfe?",
     "personalizedHelpDesc": "Kontaktieren Sie unser Team über die Kontaktseite."
-  },
-  "helpBot": {
-    "needHelp": "Brauchen Sie Hilfe?",
-    "frequentQuestions": "Hier sind Antworten auf die häufigsten Fragen:",
-    "verifyBreeder": "Wie verifiziert man einen Züchter?",
-    "verifyBreederAnswer": "Alle unsere Züchter sind mit SIRET-Nummer, ACACED-Zertifikat und offiziellen Dokumenten verifiziert.",
-    "securePayment": "Wie funktioniert die sichere Zahlung?",
-    "securePaymentAnswer": "Gelder werden treuhänderisch verwahrt bis zur Tierübergabe, was Sicherheit gewährleistet.",
-    "problem": "Was tun bei einem Problem?",
-    "problemAnswer": "Kontaktieren Sie unseren Support über die Kontaktseite oder nutzen Sie die integrierte Nachrichtenfunktion.",
-    "modifyListing": "Wie ändere ich meine Anzeige?",
-    "modifyListingAnswer": "Gehen Sie zu 'Meine Anzeigen' von Ihrem Züchter-Dashboard.",
-    "cancelReservation": "Kann ich eine Reservierung stornieren?",
-    "cancelReservationAnswer": "Stornierungsbedingungen sind im generierten Kaufvertrag definiert.",
-    "personalizedHelp": "Brauchen Sie persönliche Hilfe?",
-    "personalizedHelpDesc": "Kontaktieren Sie unser Team über die Kontaktseite."
-  },
-  "searchAnimals": {
-    "title": "Tiere suchen",
-    "subtitle": "Finden Sie Ihren perfekten Begleiter von zertifizierten Züchtern",
-    "searchPlaceholder": "Suchen nach Rasse, Name oder Standort...",
-    "filters": "Filter",
-    "filterResults": "Ergebnisse filtern",
-    "animalType": "Tierart",
-    "all": "Alle",
-    "dogs": "Hunde",
-    "cats": "Katzen",
-    "breed": "Rasse",
-    "enterBreed": "Geben Sie die Rasse ein",
-    "ageRange": "Altersbereich",
-    "allAges": "Alle Altersgruppen",
-    "puppyKitten": "Welpe/Kätzchen (0-6 Monate)",
-    "young": "Jung (6-18 Monate)",
-    "adult": "Erwachsen (18+ Monate)",
-    "cityRegion": "Stadt oder Region",
-    "priceRange": "Preisbereich",
-    "allPrices": "Alle Preise",
-    "animalsFound": "{{count}} Tiere gefunden",
-    "sortBy": "Sortieren nach:",
-    "mostRecent": "Neueste",
-    "priceLowHigh": "Preis (Niedrig zu Hoch)",
-    "priceHighLow": "Preis (Hoch zu Niedrig)",
-    "rating": "Bewertung",
-    "reserve": "Reservieren",
-    "awaitingConfirmation": "Warten auf Bestätigung",
-    "loadMore": "Mehr Tiere laden"
   },
   "paymentMethods": {
     "bankCard": "Bankkarte",
