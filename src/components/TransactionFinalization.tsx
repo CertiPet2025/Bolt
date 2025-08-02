@@ -3,13 +3,17 @@ import { HeartHandshake as Handshake, Truck, CheckCircle, Shield, AlertTriangle 
 
 interface TransactionFinalizationProps {
   onFinalize: (method: 'handover' | 'delivery') => void;
+  totalAmount: number;
 }
 
-const TransactionFinalization: React.FC<TransactionFinalizationProps> = ({ onFinalize }) => {
+const TransactionFinalization: React.FC<TransactionFinalizationProps> = ({ onFinalize, totalAmount }) => {
   const [finalized, setFinalized] = useState(false);
   const [method, setMethod] = useState<'handover' | 'delivery' | null>(null);
   const [confirmationStep, setConfirmationStep] = useState<'select' | 'confirm' | 'processing' | 'complete'>('select');
   const [selectedMethod, setSelectedMethod] = useState<'handover' | 'delivery' | null>(null);
+
+  const adminCommission = Math.round(totalAmount * 0.05);
+  const breederAmount = totalAmount - adminCommission;
 
   const handleFinalization = (selectedMethod: 'handover' | 'delivery') => {
     setSelectedMethod(selectedMethod);
@@ -30,8 +34,8 @@ const TransactionFinalization: React.FC<TransactionFinalizationProps> = ({ onFin
       // Notify all parties about fund release
       console.log('Escrow funds released - notifications sent to:', {
         buyer: `Animal delivery confirmed via ${selectedMethod}`,
-        breeder: 'Funds released from escrow to your account',
-        admin: `Transaction completed - Funds released via ${selectedMethod} confirmation`
+        breeder: `Net funds released from escrow to your account: ${breederAmount.toLocaleString()} €`,
+        admin: `Transaction completed - Commission received: ${adminCommission.toLocaleString()} € - Funds released via ${selectedMethod} confirmation`
       });
       
       onFinalize(selectedMethod);
@@ -62,8 +66,11 @@ const TransactionFinalization: React.FC<TransactionFinalizationProps> = ({ onFin
           <p className="text-orange-800 font-medium mb-2">
             Méthode sélectionnée : {selectedMethod === 'handover' ? '✋ Remise en main propre' : '🚚 Livraison par transporteur'}
           </p>
+          <p className="text-orange-700 text-sm mb-1">
+            Montant total: {totalAmount.toLocaleString()} € • Commission CertiPet: {adminCommission.toLocaleString()} €
+          </p>
           <p className="text-orange-700 text-sm">
-            Confirmez uniquement si l'animal a été effectivement remis/livré
+            Net à libérer à l'éleveur: {breederAmount.toLocaleString()} € - Confirmez uniquement si l'animal a été effectivement remis/livré
           </p>
         </div>
         
@@ -118,10 +125,10 @@ const TransactionFinalization: React.FC<TransactionFinalizationProps> = ({ onFin
         </p>
         <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
           <p className="text-green-800 font-medium">
-            ✅ Fonds libérés du séquestre vers l'éleveur
+            ✅ Fonds libérés du séquestre vers l'éleveur: {breederAmount.toLocaleString()} €
           </p>
           <p className="text-green-700 text-sm mt-1">
-            Toutes les parties ont été notifiées
+            Commission CertiPet: {adminCommission.toLocaleString()} € • Toutes les parties ont été notifiées
           </p>
         </div>
       </div>
@@ -142,8 +149,11 @@ const TransactionFinalization: React.FC<TransactionFinalizationProps> = ({ onFin
           <Shield className="w-5 h-5 text-blue-600 mr-2" />
           <p className="text-blue-800 font-medium">Fonds Sécurisés en Séquestre</p>
         </div>
+        <p className="text-blue-700 text-sm mb-1">
+          Montant total: {totalAmount.toLocaleString()} € (Commission CertiPet 5%: {adminCommission.toLocaleString()} €)
+        </p>
         <p className="text-blue-700 text-sm">
-          Les fonds ne seront libérés qu'après confirmation de la remise effective de l'animal
+          Net à l'éleveur: {breederAmount.toLocaleString()} € - Libération après confirmation de remise
         </p>
       </div>
 

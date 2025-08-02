@@ -13,6 +13,8 @@ const PaymentSystem: React.FC<PaymentSystemProps> = ({ amount, onPaymentComplete
   const [escrowStatus, setEscrowStatus] = useState<'pending' | 'held' | 'released'>('pending');
   const [transactionId, setTransactionId] = useState<string>('');
 
+  const adminCommission = Math.round(amount * 0.05);
+  const breederAmount = amount - adminCommission;
   const paymentMethods = [
     { id: 'card', name: 'Carte Bancaire', icon: CreditCard, description: 'Visa, Mastercard, Amex' },
     { id: 'applepay', name: 'Apple Pay', icon: Smartphone, description: 'Paiement rapide et sécurisé' },
@@ -37,8 +39,8 @@ const PaymentSystem: React.FC<PaymentSystemProps> = ({ amount, onPaymentComplete
       // Notify all parties about payment held in escrow
       console.log('Payment held in escrow - notifications sent to:', {
         buyer: 'Payment secured in escrow',
-        breeder: 'Payment received and held pending delivery',
-        admin: `Transaction ${transactionId} - Payment held in escrow`
+        breeder: `Payment received and held pending delivery - Net amount: ${breederAmount.toLocaleString()} €`,
+        admin: `Transaction ${transactionId} - Payment held in escrow - Commission: ${adminCommission.toLocaleString()} €`
       });
       
       onPaymentComplete();
@@ -59,6 +61,12 @@ const PaymentSystem: React.FC<PaymentSystemProps> = ({ amount, onPaymentComplete
         <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg mb-4">
           <p className="text-blue-800 font-medium mb-2">
             💰 {amount.toLocaleString()} € sécurisés en séquestre
+          </p>
+          <p className="text-blue-700 text-sm mb-1">
+            Commission CertiPet (5%): {adminCommission.toLocaleString()} €
+          </p>
+          <p className="text-blue-700 text-sm mb-2">
+            Montant net à l'éleveur: {breederAmount.toLocaleString()} €
           </p>
           <p className="text-blue-700 text-sm">
             Transaction ID: {transactionId}
@@ -118,6 +126,11 @@ const PaymentSystem: React.FC<PaymentSystemProps> = ({ amount, onPaymentComplete
           <p>• 2ème versement: {installmentAmount.toLocaleString()} € - Dans 30 jours</p>
           <p>• 3ème versement: {installmentAmount.toLocaleString()} € - Dans 60 jours</p>
           <p>• 4ème versement: {installmentAmount.toLocaleString()} € - Dans 90 jours</p>
+        </div>
+        <div className="mt-3 pt-2 border-t border-blue-300">
+          <p className="text-xs text-blue-600">
+            Commission CertiPet (5%): {adminCommission.toLocaleString()} € • Net à l'éleveur: {breederAmount.toLocaleString()} €
+          </p>
         </div>
       </div>
 

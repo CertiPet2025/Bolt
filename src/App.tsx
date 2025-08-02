@@ -14,6 +14,7 @@ import Messaging from './pages/Messaging';
 import Contact from './pages/Contact';
 // import About from './pages/About';
 import AnimalReservation from './pages/AnimalReservation';
+import AdminDashboard from './pages/AdminDashboard';
 import { AuthProvider } from './context/AuthContext';
 import HelpBot from './components/HelpBot';
 
@@ -36,6 +37,7 @@ function App() {
             <Route path="/animal/:id/reserve" element={<AnimalReservation />} />
             <Route path="/messaging" element={<Messaging />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
             {/* <Route path="/about" element={<About />} /> */}
           </Routes>
           <HelpBot />

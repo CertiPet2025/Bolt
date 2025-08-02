@@ -223,6 +223,7 @@ const AnimalReservation: React.FC = () => {
             {currentStep === 4 && paymentComplete && (
               <TransactionFinalization
                 onFinalize={handleTransactionFinalize}
+                totalAmount={animal.price}
               />
             )}
           </div>

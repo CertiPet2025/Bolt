@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Plus, List, Users, MessageSquare, TrendingUp, Eye, CheckCircle } from 'lucide-react';
+import { Plus, List, Users, MessageSquare, TrendingUp, Eye, CheckCircle, DollarSign } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const BreederDashboard: React.FC = () => {
@@ -14,6 +14,18 @@ const BreederDashboard: React.FC = () => {
     { label: t('dashboard.breeder.interestedBuyers'), value: '45', icon: Users, color: 'text-purple-600' },
     { label: t('dashboard.breeder.messages'), value: '8', icon: MessageSquare, color: 'text-orange-600' },
   ];
+
+  // Mock commission data - in real app this would come from API
+  const commissionData = {
+    totalEarnings: 15600,
+    totalCommissions: 780,
+    netEarnings: 14820,
+    recentTransactions: [
+      { id: 1, animal: 'Luna - Golden Retriever', amount: 1200, commission: 60, date: '2024-01-15' },
+      { id: 2, animal: 'Max - German Shepherd', amount: 1400, commission: 70, date: '2024-01-12' },
+      { id: 3, animal: 'Bella - Labrador', amount: 1000, commission: 50, date: '2024-01-10' },
+    ]
+  };
 
   return (
     <div className="min-h-screen bg-white py-8">
@@ -42,6 +54,48 @@ const BreederDashboard: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Commission Summary */}
+        <div className="bg-white rounded-lg border-2 border-[#A8E6CF] shadow-sm mb-8">
+          <div className="p-6 border-b border-gray-200">
+            <h2 className="text-xl font-semibold text-black flex items-center">
+              <DollarSign className="w-5 h-5 mr-2 text-[#70C1B3]" />
+              Résumé des Commissions
+            </h2>
+          </div>
+          <div className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-black">{commissionData.totalEarnings.toLocaleString()} €</div>
+                <div className="text-gray-600 text-sm">Ventes Totales</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-red-600">-{commissionData.totalCommissions.toLocaleString()} €</div>
+                <div className="text-gray-600 text-sm">Commissions CertiPet (5%)</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-600">{commissionData.netEarnings.toLocaleString()} €</div>
+                <div className="text-gray-600 text-sm">Revenus Nets</div>
+              </div>
+            </div>
+            
+            <div className="space-y-3">
+              <h3 className="font-medium text-black">Transactions Récentes</h3>
+              {commissionData.recentTransactions.map((transaction) => (
+                <div key={transaction.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                  <div>
+                    <p className="font-medium text-black">{transaction.animal}</p>
+                    <p className="text-sm text-gray-600">{new Date(transaction.date).toLocaleDateString()}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-medium text-black">{transaction.amount.toLocaleString()} €</p>
+                    <p className="text-sm text-red-600">Commission: -{transaction.commission} €</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Quick Actions */}

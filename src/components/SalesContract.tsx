@@ -90,6 +90,8 @@ const SalesContract: React.FC<SalesContractProps> = ({
             <p><strong>Âge:</strong> {animal.age}</p>
             <p><strong>Date de naissance:</strong> {animal.birthDate || 'À préciser'}</p>
             <p><strong>Prix de vente:</strong> {animal.price.toLocaleString()} €</p>
+            <p><strong>Commission CertiPet (5%):</strong> {Math.round(animal.price * 0.05).toLocaleString()} €</p>
+            <p><strong>Montant net à l'éleveur:</strong> {(animal.price - Math.round(animal.price * 0.05)).toLocaleString()} €</p>
           </div>
         </div>
 
