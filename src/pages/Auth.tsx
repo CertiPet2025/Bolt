@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Mail, Lock, User, Building } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import LegalConsent from '../components/LegalConsent';
 
 const Auth: React.FC = () => {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ const Auth: React.FC = () => {
     name: '',
     company: '',
   });
+  const [legalConsent, setLegalConsent] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -28,12 +30,19 @@ const Auth: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Check legal consent for registration
+    if (!isLogin && !legalConsent) {
+      alert(t('legal.consent.required'));
+      return;
+    }
+    
     // Simulate authentication
     const userData = {
       id: '1',
       name: formData.name || 'User',
       email: formData.email,
       type: type as 'breeder' | 'buyer' | 'admin',
+      legalConsentTimestamp: !isLogin ? new Date().toISOString() : undefined,
     };
     
     // Special case: if email contains "admin", assign admin role
@@ -148,10 +157,19 @@ const Auth: React.FC = () => {
             )}
           </div>
 
+          {!isLogin && (
+            <LegalConsent
+              checked={legalConsent}
+              onChange={setLegalConsent}
+              required={true}
+            />
+          )}
+
           <div>
             <button
               type="submit"
-              className="w-full bg-[#A8E6CF] hover:bg-[#70C1B3] text-black py-3 px-4 rounded-md font-medium transition-colors"
+              className="w-full bg-[#A8E6CF] hover:bg-[#70C1B3] text-black py-3 px-4 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!isLogin && !legalConsent}
             >
               {isLogin ? t('auth.signIn') : t('auth.createAccount')}
             </button>

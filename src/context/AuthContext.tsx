@@ -5,6 +5,7 @@ interface User {
   name: string;
   email: string;
   type: 'breeder' | 'buyer' | 'admin';
+  legalConsentTimestamp?: string;
 }
 
 interface AuthContextType {

@@ -15,6 +15,10 @@ import Contact from './pages/Contact';
 // import About from './pages/About';
 import AnimalReservation from './pages/AnimalReservation';
 import AdminDashboard from './pages/AdminDashboard';
+import CGV from './pages/CGV';
+import Charter from './pages/Charter';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import Footer from './components/Footer';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import HelpBot from './components/HelpBot';
@@ -70,6 +74,9 @@ function App() {
               </ProtectedRoute>
             } />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/cgv" element={<CGV />} />
+            <Route path="/charter" element={<Charter />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/admin/dashboard" element={
               <ProtectedRoute requiredRole="admin">
                 <AdminDashboard />
@@ -77,6 +84,7 @@ function App() {
             } />
             {/* <Route path="/about" element={<About />} /> */}
           </Routes>
+          <Footer />
           <HelpBot />
         </div>
       </Router>
