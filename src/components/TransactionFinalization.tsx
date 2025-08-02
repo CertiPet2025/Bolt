@@ -170,7 +170,6 @@ const TransactionFinalization: React.FC<TransactionFinalizationProps> = ({ onFin
           ⚠️ Attention : La libération des fonds est irréversible. Confirmez uniquement si l'animal a été effectivement remis.
         </p>
       </div>
-      </p>
     </div>
   );
 };
